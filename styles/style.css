@@ -15,7 +15,7 @@ background-size: cover;
 text-align: center;
 font-size: ;
 font-style: normal;
-font-family: inherit;
+  font-family: 'Amiri', serif;
 margin: 0 ;
 padding: ;
 border: ;
@@ -23,7 +23,8 @@ display: ;
 position: static;
 
 }
-
+h1
+{font-family: 'Tajawal', sans-serif; }
 .container{
   width: inherit;
   height: auto;
@@ -260,4 +261,30 @@ position: static;
   border: ;
   display: ;
   position: static;
+}
+.Dbtn{
+  font-family: 'Amiri', serif;;
+   font-weight: bold;
+   color: #edece6 !important;
+   font-size: 17px;
+   text-shadow: 2px 1px 4px #6B626B;
+   box-shadow: 1px 1px 5px #913B50;
+   padding: 5px 40px;
+   -moz-border-radius: 20px;
+   -webkit-border-radius: 20px;
+   border-radius: 20px;
+   border: 2px solid #B54963;
+   background: linear-gradient(top,  #B54963,  #CF5371);
+   background: -ms-linear-gradient(top,  #B54963,  #CF5371);
+   background: -webkit-gradient(linear, left top, left bottom, from(#B54963), to(#CF5371));
+   background: -moz-linear-gradient(top,  #B54963,  #CF5371);
+}
+
+.Dbtn:hover {
+  color: #edece6 !important;
+   background: #A6435B;
+   background: linear-gradient(top,  #A6435B,  #B84A65);
+   background: -ms-linear-gradient(top,  #A6435B,  #B84A65);
+   background: -webkit-gradient(linear, left top, left bottom, from(#A6435B), to(#B84A65));
+   background: -moz-linear-gradient(top,  #A6435B,  #B84A65);
 }
