@@ -4,11 +4,20 @@ a:hover{color: blue}
 a:active{color:red;}
 .hoverover:hover{color: green;}
 */
+/*
+colors
+#3a484f  //dark gray
+#edece6  //light gray
+#b54963  //dark pink
+#e57b7f  //light pink
+#88b2ad  //light blue
+#fbefc4  //light yellow
+*/
 body{
-
+//remove width to enable shrinking the page
 height:inherit;
 color:;
-background-color: #fce4ec;
+background-color: #edece6;
 background-image: url("");
 background-repeat: no-repeat;
 background-size: cover;
@@ -48,7 +57,7 @@ h1
   width: inherit;
   height: auto;
   color: ;
-  background-color: #f48fb1;
+  background-color: #88b2ad;
   background-image: url("");
   background-repeat: no-repeat;
   background-size: cover;
@@ -80,6 +89,17 @@ h1
   border: ;
   display: ;
   position: static;
+}
+
+/*text inside header*/
+.hugeText{
+  font-size: 3rem;
+  font-weight: bold;
+  color: black;
+  padding: 10px;
+  margin-right: 20px;
+  width: 400px;
+  text-align: right;
 }
 
 .sec2{
@@ -220,7 +240,7 @@ h1
   width: inherit;
   height: 300px;
   color: ;
-  background-color: #f48fb1;
+  background-color: #88b2ad;
   background-image: url("");
   background-repeat: no-repeat;
   background-size: cover;
@@ -237,7 +257,7 @@ h1
 
 .info_paragraph{
   display: inline-block;
-  width: 300px;
+  width: 250px;
   height: 250px;
   margin: 20px 50px;
   padding: 10px;
@@ -248,7 +268,7 @@ h1
   width: inherit;
   height: 100px;
   color: ;
-  background-color: #f48fb1;
+  background-color: #88b2ad;
   background-image: url("");
   background-repeat: no-repeat;
   background-size: cover;
