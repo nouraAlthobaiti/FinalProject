@@ -14,7 +14,7 @@ colors
 #fbefc4  //light yellow
 */
 body{
-//remove width to enable shrinking the page
+/*remove width to enable shrinking the page*/
 height:inherit;
 color:;
 background-color: #edece6;
@@ -32,7 +32,7 @@ display: ;
 position: static;
 
 }
-h1
+h1 title
 {font-family: 'Tajawal', sans-serif; }
 .container{
   width: inherit;
