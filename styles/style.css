@@ -15,6 +15,7 @@ colors
 */
 body{
 /*remove width to enable shrinking the page*/
+width: ;
 height:inherit;
 color:;
 background-color: #edece6;
@@ -24,18 +25,21 @@ background-size: cover;
 text-align: center;
 font-size: ;
 font-style: normal;
-  font-family: 'Amiri', serif;
+font-family: 'Amiri', serif;
 margin: 0 ;
-padding: ;
+padding:0 ;
 border: ;
 display: ;
 position: static;
 
 }
+
 h1 title
 {font-family: 'Tajawal', sans-serif; }
+
+/*not used insteade of it i use <div class="container-fluid" style="padding:0;"> to fill the page*/
 .container{
-  width: inherit;
+  width: ;
   height: auto;
   color: ;
   background-color:;
@@ -46,8 +50,8 @@ h1 title
   font-size: ;
   font-style: normal;
   font-family: inherit;
-  margin: 0 auto;
-  padding: ;
+  margin: 0;
+  padding: 0;
   border: ;
   display: ;
   position: ;
