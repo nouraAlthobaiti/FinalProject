@@ -34,7 +34,7 @@ position: static;
 
 }
 
-h1 title
+h1
 {font-family: 'Tajawal', sans-serif; }
 
 /*not used insteade of it i use <div class="container-fluid" style="padding:0;"> to fill the page*/
@@ -311,4 +311,9 @@ h1 title
    background: -ms-linear-gradient(top,  #A6435B,  #B84A65);
    background: -webkit-gradient(linear, left top, left bottom, from(#A6435B), to(#B84A65));
    background: -moz-linear-gradient(top,  #A6435B,  #B84A65);
+}
+.Abtn:hover {
+  color: #edece6 !important;
+   background: #A6435B;
+
 }

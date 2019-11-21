@@ -8,13 +8,14 @@
   <meta name="author" content="Mark Otto, Jacob Thornton, and Bootstrap contributors">
   <meta name="generator" content="Jekyll v3.8.5">
   <title>باقات العضوية</title>
-
-  <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/pricing/">
   <!-- Bootstrap CSS <from website>-->
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
   <!-- special stylesheet CSS <from my files>-->
-  <!--  <link rel="stylesheet" href="styles/style.css">-->
-
+  <link rel="stylesheet" href="styles/style.css">
+ <!-- special fonts used-->
+  <link href="https://fonts.googleapis.com/css?family=Amiri|Tajawal&display=swap" rel="stylesheet">
+  <!-- page icon -->
+  <link rel="icon" href="icon.ico">
   <style>
     .bd-placeholder-img {
       font-size: 1.125rem;
@@ -36,16 +37,44 @@
 </head>
 
 <body>
-  <div class="d-flex flex-column flex-md-row align-items-center p-3 px-md-4 mb-3 bg-white border-bottom shadow-sm">
-    <h5 class="my-0 mr-md-auto font-weight-normal">Company name</h5>
-    <nav class="my-2 my-md-0 mr-md-3">
-      <a class="p-2 text-dark" href="#">Features</a>
-      <a class="p-2 text-dark" href="#">Enterprise</a>
-      <a class="p-2 text-dark" href="#">Support</a>
-      <a class="p-2 text-dark" href="#">Pricing</a>
+  <!-- navbar $search engine -->
+  <header class="header">
+    <nav class="navbar navbar-expand-lg navbar-light">
+      <a class="navbar-brand font-weight-bold text-warning" href="#">كودي</a>
+      <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+
+      <div class="collapse navbar-collapse" id="navbarSupportedContent">
+        <ul class="navbar-nav mr-auto">
+          <li class="nav-item active">
+            <a class="nav-link font-weight-bold text-warning" href="#">الرئيسية <span class="sr-only">(current)</span></a>
+          </li>
+          <li class="nav-item dropdown">
+            <a class="nav-link dropdown-toggle font-weight-bold text-warning" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+              الاقسام
+            </a>
+            <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+              <a class="dropdown-item" href="#">html</a>
+              <a class="dropdown-item" href="#">css</a>
+              <div class="dropdown-divider"></div>
+              <a class="dropdown-item" href="#">js</a>
+            </div>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link font-weight-bold text-warning" href="#">عن موقعنا</a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link font-weight-bold text-warning" href="#">تواصل معنا</a>
+          </li>
+        </ul>
+        <form class="form-inline my-2 my-lg-0">
+          <input class="form-control mr-sm-2" type="search" placeholder="بحث" aria-label="Search">
+          <button class="btn btn-danger my-2 my-sm-0 text-warning" type="submit">بحث</button>
+        </form>
+      </div>
     </nav>
-    <a class="btn btn-outline-primary" href="#">Sign up</a>
-  </div>
+  </header>
 
   <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
     <h1 class="display-4">العضويات</h1>
@@ -64,7 +93,7 @@
             <li>يمكنك الحصول على المكونات المجانية</li>
             <li>يمكنك شراء بعض العناصر</li>
           </ul>
-          <button type="button" class="btn btn-lg btn-block btn-outline-primary">الاشتراك</button>
+          <button type="button" class="Dbtn btn-lg btn-block">الاشــتـراك </button>
         </div>
       </div>
       <div class="card mb-4 shadow-sm">
@@ -77,7 +106,7 @@
             <li>الحصول على عناصر مميزة أكثر</li>
             <li>يمكنك شراء العناصر الأخرى</li>
           </ul>
-          <button type="button" class="btn btn-lg btn-block btn-primary">الاشتراك</button>
+          <button type="button" class="Dbtn btn-lg btn-block">الاشــتـراك</button>
         </div>
       </div>
       <div class="card mb-4 shadow-sm">
@@ -90,49 +119,9 @@
             <li>ستحصل على كل ما تريد</li>
             <li>الحصول على عدد لا محدود من العناصر</li>
           </ul>
-          <button type="button" class="btn btn-lg btn-block btn-primary">الاشتراك</button>
+          <button type="button" class="Dbtn btn-lg btn-block">الاشــتـراك</button>
         </div>
       </div>
     </div>
-
-    <footer class="pt-4 my-md-5 pt-md-5 border-top">
-      <div class="row">
-        <div class="col-12 col-md">
-          <img class="mb-2" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="24" height="24">
-          <small class="d-block mb-3 text-muted">&copy; 2017-2019</small>
-        </div>
-        <div class="col-6 col-md">
-          <h5>Features</h5>
-          <ul class="list-unstyled text-small">
-            <li><a class="text-muted" href="#">Cool stuff</a></li>
-            <li><a class="text-muted" href="#">Random feature</a></li>
-            <li><a class="text-muted" href="#">Team feature</a></li>
-            <li><a class="text-muted" href="#">Stuff for developers</a></li>
-            <li><a class="text-muted" href="#">Another one</a></li>
-            <li><a class="text-muted" href="#">Last time</a></li>
-          </ul>
-        </div>
-        <div class="col-6 col-md">
-          <h5>Resources</h5>
-          <ul class="list-unstyled text-small">
-            <li><a class="text-muted" href="#">Resource</a></li>
-            <li><a class="text-muted" href="#">Resource name</a></li>
-            <li><a class="text-muted" href="#">Another resource</a></li>
-            <li><a class="text-muted" href="#">Final resource</a></li>
-          </ul>
-        </div>
-        <div class="col-6 col-md">
-          <h5>About</h5>
-          <ul class="list-unstyled text-small">
-            <li><a class="text-muted" href="#">Team</a></li>
-            <li><a class="text-muted" href="#">Locations</a></li>
-            <li><a class="text-muted" href="#">Privacy</a></li>
-            <li><a class="text-muted" href="#">Terms</a></li>
-          </ul>
-        </div>
-      </div>
-    </footer>
-  </div>
-</body>
-
-</html>
+        </body>
+          </html>
