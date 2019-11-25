@@ -16,7 +16,6 @@
 
      <!-- page icon -->
      <link rel="icon" href="icon.ico">
-
      <title>كودي</title>
   </head>
   <body>
@@ -31,7 +30,8 @@
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-
+    <button class="Sbtn" id="signBtn">تسجيل دخول </button>
+    <button  class="Sbtn" id="logBtn">تسجيل جديد </button>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
         <li class="nav-item active">
@@ -81,8 +81,7 @@
 
 <!-- sign in/up -->
 <section class="sec4">
-  <p><a href="C:\Users\wafaa\Documents\GitHub\FinalProject\Forms\تسجيل دخول .html">  تسجيل الدخول </a></p>
-  <p><a href="C:\Users\wafaa\Documents\GitHub\FinalProject\Forms\تسجيل جديد.html"> تسجيل جديد </a></p>
+
 </section>
 
 <!-- more photos collection -->
@@ -112,6 +111,30 @@
   <p class="info_paragraph">تواصل معنا</p>
 </section>
 
+
+<!-- The Modal -->
+<div id="signModal" class="modal">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span class="close">&times;</span>
+    <form class="form-signin">
+  <img class="mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+  <h1 class="h3 mb-3 font-weight-normal">تسجيل الدخول  </h1>
+  <label for="inputEmail" class="sr-only">البريد الالكتروني </label>
+  <input type="email" id="inputEmail" class="form-control" placeholder="البريد الالكتروني" required autofocus>
+  <label for="inputPassword" class="sr-only">كلمة المرور </label>
+  <input type="password" id="inputPassword" class="form-control" placeholder="كلمة المرور" required>
+  <div class="checkbox mb-3">
+    <label>
+      <input type="checkbox" value="remember-me"> تذكرني
+    </label>
+  </div>
+  <button class="Dbtn" type="submit">دخـــول</button>
+  <p class="mt-5 mb-3 text-muted">ليس لديك حساب ؟     <a href="تسجيل جديد .html ">تسجيل جديد  </a> </p>
+  <p class="mt-5 mb-3 text-muted">&copy; 2019 - 2022</p>
+</form>
+  </div>
+</div>
 <!-- footer -->
 <section class="footer">
    <b>©كل الحقوق محفوظة لموقع ساحة المصورين</b>
@@ -125,7 +148,7 @@
 </section>
 
 </div> <!--end of container-->
-
+<script src="Pscript.js" charset="utf-8">  </script>
       <!-- link to jQuery then JavaScript <from my files> -->
      <script src="jquery-3.4.1.js"></script>
      <script src="index.js"></script>
@@ -136,6 +159,23 @@
      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
      <!--link icon in footer to website-->
      <script src="https://kit.fontawesome.com/30e6357a52.js" crossorigin="anonymous"></script>
-<script src="Pscript.js" charset="utf-8">  </script>
+     <script>
+     var modal = document.getElementById("signModal");      // Get the modal
+     var btn = document.getElementById("signBtn");    // Get the button that opens the modal
+     var span = document.getElementsByClassName("close")[0];    // Get the <span> element that closes the modal
+     btn.onclick = function() {                                // When the user clicks the button, open the modal
+       modal.style.display = "block";
+     }
+     span.onclick = function() {                             // When the user clicks on <span> (x), close the modal
+       modal.style.display = "none";
+     }
+     window.onclick = function(event) {                     // When the user clicks anywhere outside of the modal, close it
+       if (event.target == modal) {
+         modal.style.display = "none";
+       }
+     }
+     </script>
+
+
   </body>
 </html>

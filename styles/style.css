@@ -61,7 +61,7 @@ h1
   width: inherit;
   height: auto;
   color: ;
-  background-color: #88b2ad;
+  background-color: #3a484f;
   background-image: url("");
   background-repeat: no-repeat;
   background-size: cover;
@@ -287,7 +287,7 @@ h1
   position: static;
 }
 .Dbtn{
-  font-family: 'Amiri', serif;;
+  font-family: 'Amiri', serif;
    font-weight: bold;
    color: #edece6 !important;
    font-size: 17px;
@@ -315,5 +315,56 @@ h1
 .Abtn:hover {
   color: #edece6 !important;
    background: #A6435B;
+}
+.Sbtn {
+  font-family: 'Amiri', serif;
+  color: #FFFFFF !important;
+  font-size: 12px;
+  padding: 5px 4px;
+  -moz-border-radius: 16px;
+  -webkit-border-radius: 16px;
+  border-radius: 16px;
+  background: #3A484F;
+}
+.Sbtn:hover {
+  color: #14396A !important;
+  background: #88b2ad;
+}
 
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  padding-top: 100px; /* Location of the box */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+
+}
+
+/* Modal Content */
+.modal-content {
+  background-color: #fefefe;
+  margin: auto;
+  padding: 20px;
+  border: 1px solid #888;
+  width: 80%;
+}
+
+/* The Close Button */
+.close {
+  color: #aaaaaa;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
+}
+
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
 }
