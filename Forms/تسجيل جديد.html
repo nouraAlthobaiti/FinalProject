@@ -17,6 +17,61 @@
    <link rel="stylesheet" href="C:\Users\wafaa\Documents\GitHub\FinalProject\styles\style.css">
   </head>
   <body class="text-center">
+    <div class="container-fluid" style="padding:0;">
+
+    <!-- navbar $search engine -->
+    <header class="header">
+      <nav class="navbar navbar-expand-lg navbar-light">
+        <a style="font-size:30px" class="navbar-brand font-weight-bold text-warning" href="#">كودي</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <form method="get" action="C:\Users\wafaa\Documents\GitHub\FinalProject\Forms\تسجيل دخول .html">
+        <button style="margin-left:15px; margin-right: 15px;"
+    class="Sbtn" id="signBtn">تسجيل دخول </button>
+      </form>
+      <form method="get" action="C:\Users\wafaa\Documents\GitHub\FinalProject\Forms\تسجيل جديد.html">
+        <button  class="Sbtn" id="logBtn">تسجيل جديد </button>
+      </form>
+      <ul class="navbar-nav mr-auto">
+      <li class="nav-item">
+        <a class="nav-link font-weight-bold text-warning" href="#"> دليل المستخدم</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link font-weight-bold text-warning" href="#"> العضويات</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link font-weight-bold text-warning" href="#">أضف محتوى للبيع</a>
+      </li>
+     </ul>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+          <ul class="navbar-nav mr-auto">
+            <li class="nav-item dropdown">
+              <a class="nav-link dropdown-toggle font-weight-bold text-warning" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                الاقسام
+              </a>
+              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <a class="dropdown-item" href="#">html</a>
+                <a class="dropdown-item" href="#">css</a>
+                <div class="dropdown-divider"></div>
+                <a class="dropdown-item" href="#">js</a>
+              </div>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link font-weight-bold text-warning" href="#">عن موقعنا</a>
+            </li>
+            <li class="nav-item">
+              <a class="nav-link font-weight-bold text-warning" href="#">تواصل معنا</a>
+            </li>
+          </ul>
+          <form class="form-inline my-2 my-lg-0">
+            <input class="form-control mr-sm-2" type="search" placeholder="بحث" aria-label="Search">
+            <button class="btn btn-danger my-2 my-sm-0 text-warning" type="submit">🔎</button>
+          </form>
+        </div>
+      </nav>
+    </header>
+    <div class="sign">
     <form class="form-signin">
   <img class="mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
   <h1 class="h3 mb-3 font-weight-normal">تسجيل جديد </h1>
@@ -31,5 +86,7 @@
   <button class="Dbtn" type="submit">دخـــول</button>
   <p class="mt-5 mb-3 text-muted">لديك حساب بالفعل ؟ <a href="تسجيل دخول .html ">  تسجيل الدخول </a> </p>
 </form>
+</div>
+</div>
 </body>
 </html>

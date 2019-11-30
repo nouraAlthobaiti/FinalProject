@@ -19,24 +19,36 @@
      <title>كودي</title>
   </head>
   <body>
-
 <!--basic page container-->
 <div class="container-fluid" style="padding:0;">
 
 <!-- navbar $search engine -->
 <header class="header">
   <nav class="navbar navbar-expand-lg navbar-light">
-    <a class="navbar-brand font-weight-bold text-warning" href="#">كودي</a>
+    <a style="font-size:30px" class="navbar-brand font-weight-bold text-warning" href="#">كودي</a>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <span class="navbar-toggler-icon"></span>
     </button>
-    <button class="Sbtn" id="signBtn">تسجيل دخول </button>
+    <form method="get" action="C:\Users\wafaa\Documents\GitHub\FinalProject\Forms\تسجيل دخول .html">
+    <button style="margin-left:15px; margin-right: 15px;"
+class="Sbtn" id="signBtn">تسجيل دخول </button>
+  </form>
+  <form method="get" action="C:\Users\wafaa\Documents\GitHub\FinalProject\Forms\تسجيل جديد.html">
     <button  class="Sbtn" id="logBtn">تسجيل جديد </button>
+  </form>
+  <ul class="navbar-nav mr-auto">
+  <li class="nav-item">
+    <a class="nav-link font-weight-bold text-warning" href="#"> دليل المستخدم</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link font-weight-bold text-warning" href="#"> العضويات</a>
+  </li>
+  <li class="nav-item">
+    <a class="nav-link font-weight-bold text-warning" href="#">أضف محتوى للبيع</a>
+  </li>
+ </ul>
     <div class="collapse navbar-collapse" id="navbarSupportedContent">
       <ul class="navbar-nav mr-auto">
-        <li class="nav-item active">
-          <a class="nav-link font-weight-bold text-warning" href="#">الرئيسية <span class="sr-only">(current)</span></a>
-        </li>
         <li class="nav-item dropdown">
           <a class="nav-link dropdown-toggle font-weight-bold text-warning" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             الاقسام
@@ -57,7 +69,7 @@
       </ul>
       <form class="form-inline my-2 my-lg-0">
         <input class="form-control mr-sm-2" type="search" placeholder="بحث" aria-label="Search">
-        <button class="btn btn-danger my-2 my-sm-0 text-warning" type="submit">بحث</button>
+        <button class="btn btn-danger my-2 my-sm-0 text-warning" type="submit">🔎</button>
       </form>
     </div>
   </nav>
@@ -111,30 +123,6 @@
   <p class="info_paragraph">تواصل معنا</p>
 </section>
 
-
-<!-- The Modal -->
-<div id="signModal" class="modal">
-  <!-- Modal content -->
-  <div class="modal-content">
-    <span class="close">&times;</span>
-    <form class="form-signin">
-  <img class="mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
-  <h1 class="h3 mb-3 font-weight-normal">تسجيل الدخول  </h1>
-  <label for="inputEmail" class="sr-only">البريد الالكتروني </label>
-  <input type="email" id="inputEmail" class="form-control" placeholder="البريد الالكتروني" required autofocus>
-  <label for="inputPassword" class="sr-only">كلمة المرور </label>
-  <input type="password" id="inputPassword" class="form-control" placeholder="كلمة المرور" required>
-  <div class="checkbox mb-3">
-    <label>
-      <input type="checkbox" value="remember-me"> تذكرني
-    </label>
-  </div>
-  <button class="Dbtn" type="submit">دخـــول</button>
-  <p class="mt-5 mb-3 text-muted">ليس لديك حساب ؟     <a href="تسجيل جديد .html ">تسجيل جديد  </a> </p>
-  <p class="mt-5 mb-3 text-muted">&copy; 2019 - 2022</p>
-</form>
-  </div>
-</div>
 <!-- footer -->
 <section class="footer">
    <b>©كل الحقوق محفوظة لموقع ساحة المصورين</b>
@@ -144,14 +132,13 @@
     <button class="btn"><i class="fab fa-facebook-square fa-2x"></i></button>
     <button class="btn"><i class="fab fa-youtube-square fa-2x"></i></button>
     <button class="btn"><i class="fab fa-linkedin-in fa-2x"></i></i></button>
-
 </section>
 
 </div> <!--end of container-->
-<script src="Pscript.js" charset="utf-8">  </script>
       <!-- link to jQuery then JavaScript <from my files> -->
+      <script src="Pscript.js">  </script>
      <script src="jquery-3.4.1.js"></script>
-     <script src="index.js"></script>
+     <!--<script src="index.js"></script> -->
      <!-- Optional JavaScript specific to bootstrap-->
      <!-- jQuery first, then Popper.js, then Bootstrap JS <from website>-->
      <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
@@ -159,22 +146,6 @@
      <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
      <!--link icon in footer to website-->
      <script src="https://kit.fontawesome.com/30e6357a52.js" crossorigin="anonymous"></script>
-     <script>
-     var modal = document.getElementById("signModal");      // Get the modal
-     var btn = document.getElementById("signBtn");    // Get the button that opens the modal
-     var span = document.getElementsByClassName("close")[0];    // Get the <span> element that closes the modal
-     btn.onclick = function() {                                // When the user clicks the button, open the modal
-       modal.style.display = "block";
-     }
-     span.onclick = function() {                             // When the user clicks on <span> (x), close the modal
-       modal.style.display = "none";
-     }
-     window.onclick = function(event) {                     // When the user clicks anywhere outside of the modal, close it
-       if (event.target == modal) {
-         modal.style.display = "none";
-       }
-     }
-     </script>
 
 
   </body>
