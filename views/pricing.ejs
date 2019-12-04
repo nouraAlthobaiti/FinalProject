@@ -1,0 +1,77 @@
+<%- include("header") -%>
+
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+  </style>
+
+<center>
+
+  <div class="pricing-header px-3 py-3 pt-md-5 pb-md-4 mx-auto text-center">
+    <h1 class="display-4">العضويات</h1>
+    <p class="lead">اختر العضوية التي تناسبك، وذلك بالاشتراك في باقاتنا المميزة</p>
+  </div>
+<form class="" action="/pricingCheck+buttonName" method="post" >
+
+  <div class="container">
+    <div class="card-deck mb-3 text-center">
+      <div class="card mb-4 shadow-sm">
+        <div class="card-header">
+          <h4 class="my-0 font-weight-normal">الباقة المجانية</h4>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title pricing-card-title">مقابل 0 ريال <small class="text-muted"> /سنويًّا</small></h3>
+          <ul class="list-unstyled mt-3 mb-4">
+            <li>يمكنك الحصول على المكونات المجانية</li>
+            <li>يمكنك شراء بعض العناصر</li>
+          </ul>
+          <button type="submit" class="Dbtn btn-lg btn-block" name="0" >الاشــتـراك </button>
+        </div>
+      </div>
+      <div class="card mb-4 shadow-sm">
+        <div class="card-header">
+          <h4 class="my-0 font-weight-normal">الباقة الفضية</h4>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title pricing-card-title"> مقابل 250 ريال <small class="text-muted"> /سنويًّا</small></h3>
+          <ul class="list-unstyled mt-3 mb-4">
+            <li>الحصول على عناصر مميزة أكثر</li>
+            <li>يمكنك شراء العناصر الأخرى</li>
+          </ul>
+          <button type="submit" class="Dbtn btn-lg btn-block" name="250" >الاشــتـراك</button>
+        </div>
+      </div>
+      <div class="card mb-4 shadow-sm">
+        <div class="card-header">
+          <h4 class="my-0 font-weight-normal">الباقة الذهبية</h4>
+        </div>
+        <div class="card-body">
+          <h3 class="card-title pricing-card-title">مقابل 500 ريال <small class="text-muted"> /سنويًّا</small></h3>
+          <ul class="list-unstyled mt-3 mb-4">
+            <li>ستحصل على كل ما تريد</li>
+            <li>الحصول على عدد لا محدود من العناصر</li>
+          </ul>
+          <button type="submit" class="Dbtn btn-lg btn-block" name="500" >الاشــتـراك</button>
+        </div>
+      </div>
+    </div>
+  </div>
+  </form>
+</center>
+
+<!--onclick="this.form.submit()"-->
+
+
+<%- include("footer") -%>

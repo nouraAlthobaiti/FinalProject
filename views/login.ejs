@@ -1,0 +1,30 @@
+
+<%- include("header") -%>
+<div class="box-right">
+
+
+    <form class="form-signin" action="/login" method="post">
+      <center>
+      <img class="mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+      <h1 class=" mb-3 font-weight-normal">تسجيل الدخول </h1>
+      <label for="inputEmail" class="sr-only">البريد الالكتروني </label>
+      <!--????-->
+      <label for="" name="errmail" style="color:red;" id="errmsg"> <%= errmail %> </label>
+
+      <input type="email" id="inputEmail" name="logemail" class="form-control" placeholder="البريد الالكتروني" required autofocus>
+      <label for="inputPassword" class="sr-only">كلمة المرور </label>
+      <input type="password" id="inputPassword" name="logpassword" class="form-control" placeholder="كلمة المرور" required>
+      <div class="checkbox mb-3">
+        <label>
+          <input type="checkbox" value="remember-me"> تذكرني
+        </label>
+      </div>
+      <button class="Dbtn" type="submit">دخـــول</button>
+      <p class="mt-5 mb-3 text-muted">ليس لديك حساب ؟ <a href="/signup">إنشاء حساب جديد </a> </p>
+      <p class="mt-5 mb-3 text-muted">&copy; 2019 - 2022</p>
+    </center>
+    </form>
+  </div>
+
+</div>
+<%- include("footer") -%>
