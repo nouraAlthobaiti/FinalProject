@@ -1,18 +1,23 @@
 //jshint esversion:6
-
+//Required Packeges
 const express = require("express");
+//This package required for variables in the html pages to use in the server and to send to database
 const bodyParser = require("body-parser");
+// Mongoose to use MongoDB with Node.js
 const mongoose = require("mongoose");
 const _ = require("lodash"); //working with arrays, numbers, objects, strings, etc.
 const bcrypt = require('bcrypt'); //securety
 const app = express();
+//This package required for user session
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
 //const alert = require("alert-node");   :((
+// To tell the server to check js files in the views folder
 app.set('view engine', 'ejs');
 app.use(bodyParser.urlencoded({
   extended: true
 }));
+// To tell the server to check files in the public folder
 app.use(express.static("public"));
 
 //--------------------------------------------
@@ -269,21 +274,18 @@ app.get('/logout', function(req, res, next) {
 
 // GET for logout logout
 app.post('/pricingCheck', function(req, res, next) {
-  //var pricvar = req.body.name; not working
-//membersh
+  var membersh = req.body.memberBtn;
     //check login
   if (req.session.userId != null) {
-
     User.findOneAndUpdate({_id: req.session.userId},
        { membership: membersh }, (function(err) {
          if (err) {
         return next(err);
 
       } else {
-        return res.redirect('/');
+        return res.redirect('/profile');
       }
     }));
-
   } else {
     // go login
     return res.redirect('/login');
