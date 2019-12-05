@@ -27,7 +27,7 @@ app.use(express.static("public"));
 // parse incoming requests
 app.use(bodyParser.json()); // tells the system that you want json to be used.
 
-mongoose.connect("mongodb://localhost:27017/testForAuth", {
+mongoose.connect("mongodb://localhost:27017/codydb", {
   useUnifiedTopology: true,
   useNewUrlParser: true,
   useFindAndModify: false,
@@ -55,7 +55,7 @@ app.use(session({
     mongooseConnection: db
   })
 }));
-//_______________________________________________________________________________schema
+//_______________________________________________________________________________user schema
 // user email username password
 var UserSchema = new mongoose.Schema({
   email: {
@@ -79,10 +79,49 @@ var UserSchema = new mongoose.Schema({
     required: true,
   }
 });
+//_______________________________________________________________________________album schema
 
-//__________________________________________________________________________________collection
+const AlbumsSchema = {
+  user: [UserSchema],
+  title: String,
+  code: String,
+  cost: Number,
+  description: String,
+  htmlCode: Boolean,
+  javascriptCode: Boolean,
+  cssCode: Boolean,
+  keyword: String
+};
+
+//_____________________________________________________________________________collection
+
+const Albums = mongoose.model("Albums", AlbumsSchema);
+//_____________________________________________________________________________insert albums
+
+
+//create var to make doc
+
+var albumDataDefault = {
+  user: { email:"nora@gmail.com" , username:"nora" , password:"123",membership:0 },
+  title: "navbar",
+  code: "<h1>",
+  cost: 500,
+  description: "test album",
+  htmlCode: true,
+  javascriptCode: false,
+  cssCode: false,
+  keyword: "no"
+};
+
+//create doc
+Albums.create(albumDataDefault);
+
+
+//_____________________________________________________________________________collection
+
 
 //authenticate input against database
+//detrmine the functionality of authenticate
 UserSchema.statics.authenticate = function(email, password, callback) {
   User.findOne({
       email: email
@@ -119,6 +158,9 @@ UserSchema.pre('save', function(next) {
 
 //create collection
 var User = mongoose.model('User', UserSchema);
+
+//_______________________________________________________________________________
+//_______________________________________________________________________________
 //_______________________________________________________________________________functions
 
 //function to control buttons appearance
@@ -147,6 +189,8 @@ app.get('/', function(req, res, next) {
   });
 
 });
+
+
 //_______________________________________________________________________________routes sign in
 // send login file to this url
 app.get('/login', function(req, res, next) {
@@ -335,6 +379,71 @@ app.post('/pricingCheck', function(req, res, next) {
 
 });
 
+//_______________________________________________________________________________routes albums
+// send albums file to this url & display albums
+
+// send albums data to this url
+app.get('/albums', function(req, res, next) {
+  var visability = visibleBtnHeader(req, res);
+
+  Albums.findOne(function(err, foundAlbums) {
+    if (!err) {
+  /*    if (!foundAlbums) {
+        return res.render("albums", {
+          btnVisability: visability[0],
+          btnVisabilityOut: visability[1],
+          newAlbums: ""
+        });
+*/
+  //    } else {
+        return res.render("albums", {
+          btnVisability: visability[0],
+          btnVisabilityOut: visability[1],
+          newAlbums: foundAlbums
+        });
+    //  }
+    }
+  });
+
+
+});
+//_______________________________________________________________________________add albums
+
+// send albums data to this url
+app.post('/addAlbums', function(req, res, next) {
+  var visability = visibleBtnHeader(req, res);
+
+  var uservar = User.findById(req.session.userId);
+
+  //create var to make doc
+
+  var albumData = {
+    user: uservar,
+    title: req.body.title,
+    code: req.body.code,
+    cost: req.body.costType,
+    description: req.body.description,
+    htmlCode: req.body.htmlCode.checked,
+    javascriptCode: req.body.javascriptCode.checked,
+    cssCode: req.body.cssCode.checked,
+    keyword: req.body.keyword
+  };
+
+  //create doc
+  Albums.create(albumData, function(error, foundAlbums) {
+    if (error) {
+      return (error);
+    } else {
+      console.log("album added successfully");
+
+      return res.render("albums", {
+        btnVisability: visability[0],
+        btnVisabilityOut: visability[1],
+        newAlbums: foundAlbums
+      });
+    }
+  });
+});
 //_______________________________________________________________________________server port
 
 

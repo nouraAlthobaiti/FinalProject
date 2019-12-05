@@ -1,0 +1,128 @@
+<%- include("header") -%>
+<style>
+  .bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  @media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+      font-size: 3.5rem;
+    }
+  }
+</style>
+<center>
+  <main role="main">
+    <section class="jumbotron text-center">
+      <div class="container">
+        <h1 class="jumbotron-heading">مكتبة كودي </h1>
+        <p class="lead text-muted"> إليك مجموعة من الأدوات و الأكواد التي تجعل تصميمك أكثر جاذبية وَ مرونة ، بإمكانك شراء أيًّا منها ، كما يمكنك عرض أي محتوى يفيد مطوري المواقع للبيع </p>
+        <p>
+          <a href="#" class="Dbtn btn-primary my-2">Main call to action</a>
+          <a href="#" class="Dbtn btn-secondary my-2">Secondary action</a>
+
+          <!-- enable add form -->
+          <a href="#add" class="Dbtn btn-primary my-2" onclick="displayForm()" id="checkToAdd">اضف كودك</a>
+
+
+        </p>
+      </div>
+    </section>
+
+    <div class="album py-5 bg-light">
+      <div class="container">
+        <!-- to display albums as rows -->
+        <div class="row">
+
+          <% newAlbums.forEach(function (albums) { %>
+
+          <!-- to display albums as clos -->
+
+          <form class="" action="/albums" method="post">
+
+
+            <div class="col-md-4">
+              <div class="card mb-4 shadow-sm">
+                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: <%= albums.title %> ">
+                  <title>Placeholder</title>
+                  <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef" dy=".3em"><%= albums.title %></text>
+                </svg>
+                <div class="card-body">
+                  <p class="card-text"> <%= albums.description %> </p>
+                  <div class="d-flex justify-content-between align-items-center">
+                    <div class="btn-group">
+                      <button type="button" class="btn Abtn btn-sm btn-outline-secondary">معاينة</button>
+                      <button type="button" class="btn  Abtn btn-sm btn-outline-secondary"><%= albums.cost %></button>
+                    </div>
+                    <small class="text-muted"><%= user.name %></small> <!-- code owner -->
+                  </div>
+                </div>
+              </div>
+            </div>
+          </form>
+
+          <% }) %>
+
+
+
+          <!-- add new codes  -->
+          <form class="" action="/addAlbums" method="post" style="display:none;" id="add">
+
+            <label for="checkType">اختر نوع الكود</label>
+            <input type="checkbox" name="htmlCode" value="htmlCode"> HTML <br>
+
+            <input type="checkbox" name="javascriptCode" value="javascriptCode"> JAVA SCRIPT <br>
+
+            <input type="checkbox" name="cssCode" value="cssCode"> CSS <br>
+
+            <label for="keyword">نوع اخر؟</label>
+            <input type="text" name="keyword" value="keyword" placeholder="كلمات دلالية">
+
+            <label for="title"> ادخل عنوان الكود</label>
+            <input type="text" name="title" value="" placeholder=" ادخل عنوان الكود">
+
+            <label for="code">ادخل كودك هنا</label>
+            <textarea name="code" rows="8" cols="80" placeholder="ادخل كودك هنا"></textarea>
+
+            <label for="description">ادخل وصف للكود</label>
+            <textarea name="description" rows="8" cols="80" placeholder=">ادخل وصف للكود"></textarea>
+
+            <label for="costType">اختر باقة مناسبة للكود</label>
+            <input type="radio" name="costType" value="0"> الباقة المجانية <br>
+
+            <input type="radio" name="costType" value="250"> الباقة الفضية 250 ريال <br>
+
+            <input type="radio" name="costType" value="500"> الباقة الذهبية 500 ريال <br>
+
+
+            <button type="submit" name="button">اضافة</button>
+
+
+          </form>
+
+
+        </div>
+      </div>
+    </div>
+  </main>
+</center>
+<!-- check if user logged in by log in button appearance -> let addForm appeares -->
+<script>
+
+
+  function displayForm() {
+    var appearance = document.getElementById('signBtn').style.display;
+    if (appearance == 'none') {
+      document.getElementById('add').style.display = 'block';
+    } else {
+      document.getElementById('checkToAdd').href = '/login';
+    }
+  }
+</script>
+
+
+<%- include("footer") -%>
