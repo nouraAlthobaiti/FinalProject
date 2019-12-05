@@ -146,6 +146,8 @@ position: static;
 
 h1 title
 {font-family: 'Tajawal', sans-serif; }
+h5 
+{color:gray;}
 
 /*not used insteade of it i use <div class="container-fluid" style="padding:0;"> to fill the page*/
 .container{
