@@ -42,10 +42,13 @@
           <span class="navbar-toggler-icon"></span>
         </button>
         <form method="get" action="/login">
-          <button style="margin-left:15px; margin-right: 15px;" class="Sbtn" id="signBtn">تسجيل دخول </button>
+          <button style="margin-left:15px; margin-right: 15px; display:<%= btnVisability %>" class="Fbtn" id="signBtn">تسجيل دخول </button>
         </form>
         <form method="get" action="/signup">
-          <button class="Sbtn" id="logBtn">تسجيل جديد </button>
+          <button class="Fbtn" id="logBtn" style="display:<%= btnVisability %>">تسجيل جديد </button>
+        </form>
+        <form method="get" action="/logout">
+          <button class="Fbtn" id="logBtn" style="display:<%= btnVisabilityOut %>"> خروج </button>
         </form>
         <ul class="navbar-nav mr-auto">
           <li class="nav-item">
