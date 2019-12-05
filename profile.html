@@ -90,7 +90,7 @@
   <li class="list-group-item">اسم المستخدم: <h5><%= username %></h5> </li>
     <li class="list-group-item"> كلمة المرور  : <h5><%= password %></h5> </li>
   <li class="list-group-item"> البريد الالكتروني: <h5><%= email %></h5> </li>
-  <li class="list-group-item">  العضوية: <h5><%= membershep %></h5> </li>
+  <li class="list-group-item">  العضوية: <h5><%= membership %></h5> </li>
 </ul>
 
 
@@ -126,7 +126,15 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
     <!--link icon in footer to website-->
     <script src="https://kit.fontawesome.com/30e6357a52.js" crossorigin="anonymous"></script>
-
+    <form method="get" action="/login">
+      <button  class="Sbtn" style="margin-left:15px; margin-right: 15px; display:<%= btnVisability %>" id="signBtn">تسجيل دخول </button>
+    </form>
+    <form method="get" action="/signup">
+      <button class="Dbtn" id="logBtn" style="display:<%= btnVisability %>">تسجيل جديد </button>
+    </form>
+    <form method="get" action="/logout">
+      <button class="Fbtn" id="logBtn" style="display:<%= btnVisabilityOut %>"> خروج </button>
+    </form>
 
     </body>
 

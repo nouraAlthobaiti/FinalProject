@@ -31,7 +31,7 @@ mongoose.connect("mongodb://localhost:27017/testForAuth", {
   useUnifiedTopology: true,
   useNewUrlParser: true,
   useFindAndModify: false,
-  useCreateIndex:true
+  useCreateIndex: true
 });
 
 var db = mongoose.connection;
@@ -119,12 +119,32 @@ UserSchema.pre('save', function(next) {
 
 //create collection
 var User = mongoose.model('User', UserSchema);
+//_______________________________________________________________________________functions
+
+//function to control buttons appearance
+function visibleBtnHeader(req, res) {
+  var N = "none";
+  var I = "inline";
+  // if user is loging in the display attribute for buttons will change
+  if (req.session.userId != null) {
+    //first value for btnVisability in header.ejs (button: login , signup)
+    //second for btnVisabilityOut in header.ejs (button: logout , profile)
+    return [N, I];
+  } else {
+    return [I, N];
+  }
+}
+
 
 //_______________________________________________________________________________routes main
 
 // send home file to this url
 app.get('/', function(req, res, next) {
-  return res.render("index");
+  var visability = visibleBtnHeader(req, res);
+  return res.render("index", {
+    btnVisability: visability[0],
+    btnVisabilityOut: visability[1]
+  });
 
 });
 //_______________________________________________________________________________routes sign in
@@ -132,8 +152,11 @@ app.get('/', function(req, res, next) {
 app.get('/login', function(req, res, next) {
   //return res.render("login");
   // any ejs var should be given value (initiated)
+  var visability = visibleBtnHeader(req, res);
   return res.render("login", {
-    errmail: ''
+    errmail: '',
+    btnVisability: visability[0],
+    btnVisabilityOut: visability[1]
   });
 
   //res.sendFile(__dirname + '/login.html');
@@ -142,15 +165,22 @@ app.get('/login', function(req, res, next) {
 
 // send pricing file to this url
 app.get('/pricing', function(req, res, next) {
-  return res.render("pricing");
+  var visability = visibleBtnHeader(req, res);
+  return res.render("pricing", {
+    btnVisability: visability[0],
+    btnVisabilityOut: visability[1]
+  });
 });
 
 //_______________________________________________________________________________routes signup->pricing
 
 // send pricing file to this url
 app.get('/signup', function(req, res, next) {
+  var visability = visibleBtnHeader(req, res);
   return res.render("signup", {
-    repeatedAccMsg: ''
+    repeatedAccMsg: '',
+    btnVisability: visability[0],
+    btnVisabilityOut: visability[1]
   });
 
   //res.sendFile(__dirname + '/signup.html');
@@ -235,6 +265,8 @@ app.post('/signup', function(req, res, next) {
 
 // GET route after registering
 app.get('/profile', function(req, res, next) {
+  var visability = visibleBtnHeader(req, res);
+
   User.findById(req.session.userId)
     .exec(function(error, user) {
       if (error) {
@@ -247,7 +279,10 @@ app.get('/profile', function(req, res, next) {
         } else {
           return res.render("profile", {
             username: user.username,
-            email: user.email
+            email: user.email,
+            membership: user.membership,
+            btnVisability: visability[0],
+            btnVisabilityOut: visability[1]
           }); //(/profile --> change url only) otherwise (render my ejs file)
         }
       }
@@ -275,12 +310,18 @@ app.get('/logout', function(req, res, next) {
 
 // GET for logout logout
 app.post('/pricingCheck', function(req, res, next) {
+  // Always the value attribute of elements will send in submit form (from client to server)
+  // memberBtn is the name of buttons in pricinig.ejs
+  // req.body.memberBtn is the sending value of button clicked for submitting
   var membersh = req.body.memberBtn;
-    //check login
+  //check login
   if (req.session.userId != null) {
-    User.findOneAndUpdate({_id: req.session.userId},
-       { membership: membersh }, (function(err) {
-         if (err) {
+    User.findOneAndUpdate({
+      _id: req.session.userId
+    }, {
+      membership: membersh
+    }, (function(err) {
+      if (err) {
         return next(err);
 
       } else {
