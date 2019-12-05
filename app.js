@@ -121,7 +121,7 @@ UserSchema.pre('save', function(next) {
 var User = mongoose.model('User', UserSchema);
 //_______________________________________________________________________________functions
 
-//function to control buttons appearance 
+//function to control buttons appearance
 function visibleBtnHeader(req, res) {
   var N = "none";
   var I = "inline";
@@ -310,6 +310,9 @@ app.get('/logout', function(req, res, next) {
 
 // GET for logout logout
 app.post('/pricingCheck', function(req, res, next) {
+  // Always the value attribute of elements will send in submit form (from client to server)
+  // memberBtn is the name of buttons in pricinig.ejs
+  // req.body.memberBtn is the sending value of button clicked for submitting
   var membersh = req.body.memberBtn;
   //check login
   if (req.session.userId != null) {
