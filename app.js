@@ -30,7 +30,8 @@ app.use(bodyParser.json()); // tells the system that you want json to be used.
 mongoose.connect("mongodb://localhost:27017/testForAuth", {
   useUnifiedTopology: true,
   useNewUrlParser: true,
-  useFindAndModify: false
+  useFindAndModify: false,
+  useCreateIndex:true
 });
 
 var db = mongoose.connection;
