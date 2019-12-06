@@ -198,6 +198,7 @@ h1 title {
 h5
 {color: gray;}
 /*not used insteade of it i use <div class="container-fluid" style="padding:0;"> to fill the page*/
+
 .container {
   width: ;
   height: auto;
@@ -459,7 +460,11 @@ h5
   padding: 10px;
   text-align: justify;
 }
-
+.form-signin
+{
+margin-left: 400px;
+margin-right: 400px;
+}
 .footer {
   width: inherit;
   height: 100px;
