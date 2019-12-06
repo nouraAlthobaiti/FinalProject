@@ -82,15 +82,49 @@ var UserSchema = new mongoose.Schema({
 //_______________________________________________________________________________album schema
 
 const AlbumsSchema = {
-  user: [UserSchema],
-  title: String,
-  code: String,
-  cost: Number,
-  description: String,
-  htmlCode: Boolean,
-  javascriptCode: Boolean,
-  cssCode: Boolean,
-  keyword: String
+  /*  user_email: {
+      type: String,
+      unique: true,
+      required: true,
+      trim: true,
+    },*/
+  title: {
+    type: String,
+    required: false
+  },
+  code: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  cost: {
+    type: Number,
+    required: false,
+    //default: 0,
+  },
+  description: {
+    type: String,
+    required: false
+  },
+  htmlCode: {
+    type: Boolean,
+    default: false,
+    required: false
+  },
+  javascriptCode: {
+    type: Boolean,
+    default: false,
+    required: false
+  },
+  cssCode: {
+    type: Boolean,
+    default: false,
+    required: false
+  },
+  keyword: {
+    type: String,
+    required: false
+  }
 };
 
 //_____________________________________________________________________________collection
@@ -98,7 +132,7 @@ const AlbumsSchema = {
 const Albums = mongoose.model("Albums", AlbumsSchema);
 //_____________________________________________________________________________insert albums
 
-
+/*
 //create var to make doc
 
 var albumDataDefault = {
@@ -115,7 +149,7 @@ var albumDataDefault = {
 
 //create doc
 Albums.create(albumDataDefault);
-
+*/
 
 //_____________________________________________________________________________collection
 
@@ -169,11 +203,12 @@ function visibleBtnHeader(req, res) {
   var I = "inline";
   // if user is loging in the display attribute for buttons will change
   if (req.session.userId != null) {
-    //first value for btnVisability in header.ejs (button: login , signup)
-    //second for btnVisabilityOut in header.ejs (button: logout , profile)
-    return [N, I];
+    //first value for btnVisability in header.ejs (button: login )
+    //second for btnVisabilityOut in header.ejs (button: logout )
+  //third for btnVisabilityProfile in header.ejs (button: my profile )
+    return [N, I , I];
   } else {
-    return [I, N];
+    return [I, N, N];
   }
 }
 
@@ -185,11 +220,24 @@ app.get('/', function(req, res, next) {
   var visability = visibleBtnHeader(req, res);
   return res.render("index", {
     btnVisability: visability[0],
-    btnVisabilityOut: visability[1]
+    btnVisabilityOut: visability[1],
+    btnVisabilityProfile: visability[2]
   });
 
 });
 
+//_______________________________________________________________________________routes add albums
+
+// send addalbums file to this url
+app.get('/addalbums', function(req, res, next) {
+  var visability = visibleBtnHeader(req, res);
+  return res.render("addalbums", {
+    btnVisability: visability[0],
+    btnVisabilityOut: visability[1],
+    btnVisabilityProfile: visability[2]
+  });
+
+});
 
 //_______________________________________________________________________________routes sign in
 // send login file to this url
@@ -200,31 +248,34 @@ app.get('/login', function(req, res, next) {
   return res.render("login", {
     errmail: '',
     btnVisability: visability[0],
-    btnVisabilityOut: visability[1]
+    btnVisabilityOut: visability[1],
+    btnVisabilityProfile: visability[2]
   });
 
   //res.sendFile(__dirname + '/login.html');
 });
-//_______________________________________________________________________________routes login->pricing
+//_______________________________________________________________________________routes login->membership
 
-// send pricing file to this url
-app.get('/pricing', function(req, res, next) {
+// send membership file to this url
+app.get('/membership', function(req, res, next) {
   var visability = visibleBtnHeader(req, res);
-  return res.render("pricing", {
+  return res.render("membership", {
     btnVisability: visability[0],
-    btnVisabilityOut: visability[1]
+    btnVisabilityOut: visability[1],
+    btnVisabilityProfile: visability[2]
   });
 });
 
-//_______________________________________________________________________________routes signup->pricing
+//_______________________________________________________________________________routes signup->membership
 
-// send pricing file to this url
+// send membership file to this url
 app.get('/signup', function(req, res, next) {
   var visability = visibleBtnHeader(req, res);
   return res.render("signup", {
     repeatedAccMsg: '',
     btnVisability: visability[0],
-    btnVisabilityOut: visability[1]
+    btnVisabilityOut: visability[1],
+    btnVisabilityProfile: visability[2]
   });
 
   //res.sendFile(__dirname + '/signup.html');
@@ -239,11 +290,14 @@ app.post('/login', function(req, res, next) {
         var err = new Error('Wrong email or password.');
 
         return res.render("login", {
-          errmail: 'البريد الالكتروني أو كلمة المرور خاطئة'
+          errmail: 'البريد الالكتروني أو كلمة المرور خاطئة',
+          btnVisability: "inline",
+          btnVisabilityOut: "none‏",
+          btnVisabilityProfile: "none"
         });
       } else {
         req.session.userId = user._id;
-        return res.redirect('/profile');
+        return res.redirect('/');
       }
     });
   } else {
@@ -297,7 +351,7 @@ app.post('/signup', function(req, res, next) {
 
       User.authenticate(req.body.email, req.body.password, function(error, user) {
         req.session.userId = user._id;
-        return res.redirect('/profile');
+        return res.redirect('/');
       });
     }
   });
@@ -326,7 +380,8 @@ app.get('/profile', function(req, res, next) {
             email: user.email,
             membership: user.membership,
             btnVisability: visability[0],
-            btnVisabilityOut: visability[1]
+            btnVisabilityOut: visability[1],
+            btnVisabilityProfile: visability[2]
           }); //(/profile --> change url only) otherwise (render my ejs file)
         }
       }
@@ -350,10 +405,10 @@ app.get('/logout', function(req, res, next) {
 });
 
 
-//_______________________________________________________________________________pricing
+//_______________________________________________________________________________membership
 
 // GET for logout logout
-app.post('/pricingCheck', function(req, res, next) {
+app.post('/membershipCheck', function(req, res, next) {
   // Always the value attribute of elements will send in submit form (from client to server)
   // memberBtn is the name of buttons in pricinig.ejs
   // req.body.memberBtn is the sending value of button clicked for submitting
@@ -369,7 +424,7 @@ app.post('/pricingCheck', function(req, res, next) {
         return next(err);
 
       } else {
-        return res.redirect('/profile');
+        return res.redirect('/');
       }
     }));
   } else {
@@ -388,20 +443,21 @@ app.get('/albums', function(req, res, next) {
 
   Albums.findOne(function(err, foundAlbums) {
     if (!err) {
-  /*    if (!foundAlbums) {
+      /*    if (!foundAlbums) {
         return res.render("albums", {
           btnVisability: visability[0],
           btnVisabilityOut: visability[1],
           newAlbums: ""
         });
 */
-  //    } else {
-        return res.render("albums", {
-          btnVisability: visability[0],
-          btnVisabilityOut: visability[1],
-          newAlbums: foundAlbums
-        });
-    //  }
+      //    } else {
+      return res.render("albums", {
+        btnVisability: visability[0],
+        btnVisabilityOut: visability[1],
+        btnVisabilityProfile: visability[2],
+        newAlbums: foundAlbums
+      });
+      //  }
     }
   });
 
@@ -411,38 +467,72 @@ app.get('/albums', function(req, res, next) {
 
 // send albums data to this url
 app.post('/addAlbums', function(req, res, next) {
+  //control buttons appearance
   var visability = visibleBtnHeader(req, res);
+//get user email as a key
+  var uservar = "";
+  User.findById(req.session.userId)
+    .exec(function(error, user) {
+      if (error) {
+        return next(error);
+      } else {
+        uservar = user.email;
+      }
+    });
 
-  var uservar = User.findById(req.session.userId);
+// catch checkboxes status   < err1-->[] err2-->"" >
+  var booleanACodeType=[];
+  if (req.body.htmlCode == "true") {
+    booleanACodeType[0] = true;
+  } else {
+    booleanACodeType[0] = false;
+  }
+  if (req.body.javascriptCode == "true") {
+    booleanACodeType[1] = true;
+  } else {
+    booleanACodeType[1] = false;
+  }
+  if (req.body.cssCode == "true") {
+    booleanACodeType[2] = true;
+  } else {
+    booleanACodeType[2] = false;
+  }
 
-  //create var to make doc
 
-  var albumData = {
-    user: uservar,
-    title: req.body.title,
-    code: req.body.code,
-    cost: req.body.costType,
-    description: req.body.description,
-    htmlCode: req.body.htmlCode.checked,
-    javascriptCode: req.body.javascriptCode.checked,
-    cssCode: req.body.cssCode.checked,
-    keyword: req.body.keyword
-  };
+//check if user logged in
+  if (req.session.userId != null) {
 
-  //create doc
-  Albums.create(albumData, function(error, foundAlbums) {
-    if (error) {
-      return (error);
-    } else {
-      console.log("album added successfully");
+    //create var to make doc
+    var albumData = {
+      //user_email: uservar,
+      title: req.body.title,
+      code: req.body.code,
+      cost: Number(req.body.costType, 10), // string in number
+      //  cost: req.body.costType,
+      description: req.body.description,
+      htmlCode: booleanACodeType[0],
+      javascriptCode: booleanACodeType[1],
+      cssCode: booleanACodeType[2],
+      keyword: req.body.keyword
+    };
 
-      return res.render("albums", {
-        btnVisability: visability[0],
-        btnVisabilityOut: visability[1],
-        newAlbums: foundAlbums
-      });
-    }
-  });
+    //create doc
+    Albums.create(albumData, function(error, foundAlbums) {
+      if (error) {
+        console.log(error);
+        return (error);
+      } else {
+        console.log("album added successfully");
+
+        // go addalbums function in app.js
+        return res.redirect('/addalbums');  //albums
+      }
+    });
+  } //end if log in
+  else {
+    // go login
+    return res.redirect('/login');
+  }
 });
 //_______________________________________________________________________________server port
 

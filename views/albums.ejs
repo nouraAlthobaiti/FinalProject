@@ -68,61 +68,12 @@
           <% }) %>
 
 
-
-          <!-- add new codes  -->
-          <form class="" action="/addAlbums" method="post" style="display:none;" id="add">
-
-            <label for="checkType">اختر نوع الكود</label>
-            <input type="checkbox" name="htmlCode" value="htmlCode"> HTML <br>
-
-            <input type="checkbox" name="javascriptCode" value="javascriptCode"> JAVA SCRIPT <br>
-
-            <input type="checkbox" name="cssCode" value="cssCode"> CSS <br>
-
-            <label for="keyword">نوع اخر؟</label>
-            <input type="text" name="keyword" value="keyword" placeholder="كلمات دلالية">
-
-            <label for="title"> ادخل عنوان الكود</label>
-            <input type="text" name="title" value="" placeholder=" ادخل عنوان الكود">
-
-            <label for="code">ادخل كودك هنا</label>
-            <textarea name="code" rows="8" cols="80" placeholder="ادخل كودك هنا"></textarea>
-
-            <label for="description">ادخل وصف للكود</label>
-            <textarea name="description" rows="8" cols="80" placeholder=">ادخل وصف للكود"></textarea>
-
-            <label for="costType">اختر باقة مناسبة للكود</label>
-            <input type="radio" name="costType" value="0"> الباقة المجانية <br>
-
-            <input type="radio" name="costType" value="250"> الباقة الفضية 250 ريال <br>
-
-            <input type="radio" name="costType" value="500"> الباقة الذهبية 500 ريال <br>
-
-
-            <button type="submit" name="button">اضافة</button>
-
-
-          </form>
-
-
         </div>
       </div>
     </div>
   </main>
 </center>
-<!-- check if user logged in by log in button appearance -> let addForm appeares -->
-<script>
 
-
-  function displayForm() {
-    var appearance = document.getElementById('signBtn').style.display;
-    if (appearance == 'none') {
-      document.getElementById('add').style.display = 'block';
-    } else {
-      document.getElementById('checkToAdd').href = '/login';
-    }
-  }
-</script>
 
 
 <%- include("footer") -%>
