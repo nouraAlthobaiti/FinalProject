@@ -531,3 +531,7 @@ margin-right: 400px;
   color: #14396A !important;
   background: #88b2ad;
 }
+.Abtn:hover {
+  color: #edece6 !important;
+   background: #A6435B;
+}
