@@ -1,106 +1,110 @@
  <!DOCTYPE html>
-<html lang="ar" dir="rtl">
+ <html lang="ar" dir="rtl">
 
-<head>
-  <!-- Required meta tags -->
-  <meta charset="utf-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+ <head>
+   <!-- Required meta tags -->
+   <meta charset="utf-8">
+   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
-  <!-- Bootstrap CSS <from website>-->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+   <!-- Bootstrap CSS <from website>-->
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-<!--sign user-->
-  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+   <!--sign user-->
+   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-  <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
+   <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+   <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 
-  <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
-<!--sign user-->
+   <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+   <!--sign user-->
 
-  <!-- special stylesheet CSS <from my files>-->
-  <link rel="stylesheet" href="css/style.css">
+   <!-- special stylesheet CSS <from my files>-->
+   <link rel="stylesheet" href="css/style.css">
 
-  <!-- special fonts used-->
-  <link href="https://fonts.googleapis.com/css?family=Amiri|Tajawal&display=swap" rel="stylesheet">
+   <!-- special fonts used-->
+   <link href="https://fonts.googleapis.com/css?family=Amiri|Tajawal&display=swap" rel="stylesheet">
 
-  <!-- page icon -->
-  <link rel="icon" href="img/icon.ico">
-  <title>كودي</title>
-</head>
+   <!-- page icon -->
+   <link rel="icon" href="img/icon.ico">
+   <title>كودي</title>
+ </head>
 
-<body>
-  <!--basic page container-->
-  <div class="container-fluid" style="padding:0;">
+ <body>
+   <!--basic page container-->
+   <div class="container-fluid" style="padding:0; ">
 
-    <!-- navbar $search engine -->
-    <header class="header">
-      <nav class="navbar navbar-expand-lg navbar-light">
-        <a style="font-size:30px" class="navbar-brand font-weight-bold text-warning" href="/"><img src="img\logo.png" width="120" height="70"></a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <form method="get" action="/login">
-          <button  class="Sbtn" style="margin-left:15px; margin-right: 15px; display:<%= btnVisability %>" id="signBtn">تسجيل دخول </button>
-        </form>
-        <form method="get" action="/signup">
-          <button class="Sbtn" id="logBtn" style="display:<%= btnVisability %>">تسجيل جديد </button>
-        </form>
-        <form method="get" action="/logout">
-          <button class="Sbtn" id="logBtn" style="display:<%= btnVisabilityOut %>"> خروج </button>
-        </form>
+     <!-- navbar $search engine -->
+     <header class="header">
+       <nav class="navbar navbar-expand-lg navbar-light">
+         <a style="font-size:30px" class="navbar-brand font-weight-bold text-warning" href="/"><img src="img/logo.png" width="120" height="70"></a>
 
-        <ul class="navbar-nav mr-auto">
+         <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+           <span class="navbar-toggler-icon"></span>
+         </button>
 
-          <li class="nav-item">
-            <a class="nav-link font-weight-bold text-warning" href="/userManual"> دليل المستخدم</a>
-          </li>
+         <form method="get" action="/login">
+           <button class="Sbtn" style="margin-left:15px; margin-right: 15px; display:<%= btnVisability %>" id="signBtn">تسجيل دخول </button>
+         </form>
 
-          <li class="nav-item">
-            <a class="nav-link font-weight-bold text-warning" href="/membership"> العضويات</a>
-          </li>
+         <form method="get" action="/signup">
+           <button class="Sbtn" id="logBtn" style="display:<%= btnVisability %>">تسجيل جديد </button>
+         </form>
 
-          <li class="nav-item">
-            <a class="nav-link font-weight-bold text-warning" href="/addalbums">الألبومات</a>
-          </li>
+         <form method="get" action="/logout">
+           <button class="Sbtn" id="logBtn" style="display:<%= btnVisabilityOut %>"> خروج </button>
+         </form>
 
-        </ul>
+         <ul class="navbar-nav mr-auto">
 
-        <li class="nav-item">
-          <a class="nav-link font-weight-bold text-warning" href="/profile" style="display:<%= btnVisabilityProfile %> ">ملفي الشخصي</a>
-        </li>
+           <li class="nav-item">
+             <a class="nav-link font-weight-bold text-warning" href="/userManual"> دليل المستخدم</a>
+           </li>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav mr-auto">
+           <li class="nav-item">
+             <a class="nav-link font-weight-bold text-warning" href="/membership"> العضويات</a>
+           </li>
 
-            <li class="nav-item dropdown">
-              <a class="nav-link dropdown-toggle font-weight-bold text-warning" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                الاقسام
-              </a>
+           <li class="nav-item">
+             <a class="nav-link font-weight-bold text-warning" href="/albums">الألبومات</a>
+           </li>
 
-              <div class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <a class="dropdown-item" href="#">html</a>
-                <a class="dropdown-item" href="#">css</a>
-                <div class="dropdown-divider"></div>
-                <a class="dropdown-item" href="#">js</a>
-              </div>
-            </li>
+         </ul>
 
-            <li class="nav-item">
-              <a class="nav-link font-weight-bold text-warning" href="#aboutsite">عن موقعنا</a>
-            </li>
 
-            <li class="nav-item">
-              <a class="nav-link font-weight-bold text-warning" href="#contact">تواصل معنا</a>
-            </li>
+         <a class="nav-link font-weight-bold text-warning" href="/profile" style="display:<%= btnVisabilityProfile %> ">ملفي الشخصي</a>
 
-          </ul>
 
-          <form class="form-inline my-2 my-lg-0">
-            <input class="form-control mr-sm-2" type="search" placeholder="بحث" aria-label="Search">
-            <button class="btn btn-danger my-2 my-sm-0 text-warning" type="submit">🔎</button>
-          </form>
-        </div>
-      </nav>
-    </header>
+         <div class="collapse navbar-collapse" id="navbarSupportedContent">
+           <ul class="navbar-nav mr-auto">
+
+             <li class="nav-item dropdown">
+               <a class="nav-link dropdown-toggle font-weight-bold text-warning" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                 الاقسام
+               </a>
+
+               <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                 <a class="dropdown-item" href="#">html</a>
+                 <a class="dropdown-item" href="#">css</a>
+                 <div class="dropdown-divider"></div>
+                 <a class="dropdown-item" href="#">js</a>
+               </div>
+             </li>
+
+             <li class="nav-item">
+               <a class="nav-link font-weight-bold text-warning" href="#aboutsite">عن موقعنا</a>
+             </li>
+
+             <li class="nav-item">
+               <a class="nav-link font-weight-bold text-warning" href="#contact">تواصل معنا</a>
+             </li>
+
+           </ul>
+
+           <form class="form-inline my-2 my-lg-0">
+             <input class="form-control mr-sm-2" type="search" placeholder="بحث" aria-label="Search">
+             <button class="btn btn-danger my-2 my-sm-0 text-warning" type="submit">🔎</button>
+           </form>
+         </div>
+       </nav>
+     </header>
