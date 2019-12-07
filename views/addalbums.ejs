@@ -1,0 +1,97 @@
+<%- include("header") -%>
+<style>
+  .bd-placeholder-img {
+    font-size: 1.125rem;
+    text-anchor: middle;
+    -webkit-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+  }
+
+  @media (min-width: 768px) {
+    .bd-placeholder-img-lg {
+      font-size: 3.5rem;
+    }
+  }
+</style>
+<center>
+  <main role="main">
+    <section class="jumbotron text-center">
+      <div class="container">
+        <h1 class="jumbotron-heading">مكتبة كودي </h1>
+        <p class="lead text-muted"> إليك مجموعة من الأدوات و الأكواد التي تجعل تصميمك أكثر جاذبية وَ مرونة ، بإمكانك شراء أيًّا منها ، كما يمكنك عرض أي محتوى يفيد مطوري المواقع للبيع </p>
+        <p>
+          <a href="/" class="Dbtn btn-primary my-2"> الرئيسية </a>
+          <a href="/albums" class="Dbtn btn-secondary my-2">عودة الى الالبومات </a>
+
+          <!-- enable add form -->
+          <!--onclick="displayForm()"-->
+          <a href="#add" class="Dbtn btn-primary my-2" id="checkToAdd">اضف كودك</a>
+
+
+        </p>
+      </div>
+    </section>
+
+    <div class="album py-5 bg-light">
+      <div class="container-fluid">
+        <!-- to display albums as rows -->
+
+
+          <!-- add new codes  -->
+          <form class="" action="/addAlbums" method="post" style="align:center;" <!--style="display:none;" id="add" -->>
+
+            <label for="checkType"> اختر نوع الكود </label> <br>
+            <input type="checkbox" name="htmlCode" value="true"> HTML <br>
+
+            <input type="checkbox" name="javascriptCode" value="true"> JAVA SCRIPT <br>
+
+            <input type="checkbox" name="cssCode" value="true"> CSS <br> <br>
+            <hr class="hr-line">
+
+            <label for="keyword">نوع اخر؟</label> <br>
+            <input type="text" name="keyword" value="" placeholder="كلمات دلالية"> <br>
+
+            <label for="title"> ادخل عنوان الكود </label> <br>
+            <input type="text" name="title" value="" placeholder=" ادخل عنوان الكود"> <br>
+
+            <label for="code"> ادخل كودك هنا </label> <br>
+            <textarea name="code" rows="8" cols="80" placeholder="ادخل كودك هنا"></textarea> <br>
+
+            <label for="description">ادخل وصف للكود</label> <br>
+            <textarea name="description" rows="8" cols="80" placeholder=">ادخل وصف للكود"></textarea> <br>
+
+            <label for="costType">اختر باقة مناسبة للكود</label> <br>
+            <input type="radio" name="costType" value="0"> الباقة المجانية <br>
+
+            <input type="radio" name="costType" value="250"> الباقة الفضية 250 ريال <br>
+
+            <input type="radio" name="costType" value="500"> الباقة الذهبية 500 ريال <br>
+
+
+            <button type="submit" name="button">اضافة</button>
+
+
+          </form>
+
+
+
+      </div>
+    </div>
+  </main>
+</center>
+<!-- check if user logged in by log in button appearance -> let addForm appeares -->
+<script>
+  function displayForm() {
+    var appearance = document.getElementById('signBtn').style.display;
+    if (appearance == 'none') {
+      document.getElementById('add').style.display = 'block';
+    } else {
+      document.getElementById('checkToAdd').href = '/login';
+    }
+  }
+</script>
+
+
+<%- include("footer") -%>
