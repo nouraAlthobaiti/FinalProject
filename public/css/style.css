@@ -13,6 +13,11 @@ colors
 #88b2ad  //light blue
 #fbefc4  //light yellow
 */
+
+a:link {
+  text-decoration: none;
+}
+
 /* colors */
 .red {
   color: red;
@@ -451,7 +456,7 @@ font-weight: bolder;
   font-style: normal;
   font-family: inherit;
   margin: 5px auto;
-  padding: 10px;
+  padding:;
   border: ;
   display: ;
   position: static;
@@ -461,8 +466,8 @@ font-weight: bolder;
   display: inline-block;
   width: 300px;
   height: 250px;
-  margin: 20px 50px;
-  padding: 10px;
+  margin: 10px;
+  padding: 20px;
   text-align: justify;
 }
 .form-signin
