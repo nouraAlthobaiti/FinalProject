@@ -437,7 +437,7 @@ h5
   width: inherit;
   height: 300px;
   color: ;
-  background-color: #88b2ad;
+  background-color: #3A484F;
   background-image: url("");
   background-repeat: no-repeat;
   background-size: cover;
@@ -486,6 +486,11 @@ margin-right: 400px;
   border: ;
   display: ;
   position: static;
+}
+.info_paragraph
+{
+  color: #88b2ad;
+  font-weight: bolder;
 }
 .Fbtn
 {
@@ -539,3 +544,9 @@ margin-right: 400px;
   color: #edece6 !important;
    background: #A6435B;
 }
+.Pbtn
+{background-color: #3A484F;
+border:0px;}
+  .Pbtn:hover
+  {
+    background: #88b2ad;}
