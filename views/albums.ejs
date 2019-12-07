@@ -22,52 +22,65 @@
         <h1 class="jumbotron-heading">مكتبة كودي </h1>
         <p class="lead text-muted"> إليك مجموعة من الأدوات و الأكواد التي تجعل تصميمك أكثر جاذبية وَ مرونة ، بإمكانك شراء أيًّا منها ، كما يمكنك عرض أي محتوى يفيد مطوري المواقع للبيع </p>
         <p>
-          <a href="#" class="Dbtn btn-primary my-2">Main call to action</a>
-          <a href="#" class="Dbtn btn-secondary my-2">Secondary action</a>
+          <a href="/" class="Dbtn btn-primary my-2">الرئيسية</a>
+          <a href="/membership" class="Dbtn btn-secondary my-2">حدث عضويتك</a>
 
           <!-- enable add form -->
-          <a href="#add" class="Dbtn btn-primary my-2" onclick="displayForm()" id="checkToAdd">اضف كودك</a>
-
+          <!--  <a href="/addnewAlbumss" class="Dbtn btn-primary my-2" onclick="displayForm()" id="checkToAdd">اضف كودك</a>  -->
+          <a href="/addAlbums" class="Dbtn btn-primary my-2" style="display:<%= btnVisabilityAdd %>"> اضف كودك </a>
 
         </p>
       </div>
     </section>
 
-    <div class="album py-5 bg-light">
-      <div class="container">
-        <!-- to display albums as rows -->
+
+    <div class="newAlbums py-5 bg-light">
+      <div class="container-fluid">
+        <!-- to display newAlbumss as rows -->
         <div class="row">
-
-          <% newAlbums.forEach(function (albums) { %>
-
-          <!-- to display albums as clos -->
 
           <form class="" action="/albums" method="post">
 
+            <!-- const array_name = ['a', 'b', 'c'];  -->
+            <!-- array_name.forEach(function () {} ); -->
+
+            <%  for (var i = 0, len = newAlbums.length; i < len; i++) { %>
+
+
+
+            <!-- to display newAlbumss as clos -->
 
             <div class="col-md-4">
               <div class="card mb-4 shadow-sm">
-                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: <%= albums.title %> ">
-                  <title>Placeholder</title>
-                  <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef" dy=".3em"><%= albums.title %></text>
+
+                <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder:  ">
+                  <title> <%= newAlbums.title %> </title>
+                  <rect width="100%" height="100%" fill="#55595c" />
+                  <text x="50%" y="50%" fill="#eceeef" dy=".3em"> <%= newAlbums[i].title %> </text>
                 </svg>
+
                 <div class="card-body">
-                  <p class="card-text"> <%= albums.description %> </p>
+                  <p class="card-text"> <%= newAlbums[i].description %> </p>
+
                   <div class="d-flex justify-content-between align-items-center">
+
                     <div class="btn-group">
                       <button type="button" class="btn Abtn btn-sm btn-outline-secondary">معاينة</button>
-                      <button type="button" class="btn  Abtn btn-sm btn-outline-secondary"><%= albums.cost %></button>
+                      <button type="button" class="btn  Abtn btn-sm btn-outline-secondary"><%= newAlbums[i].cost %></button>
                     </div>
-                    <small class="text-muted"><%= user.name %></small> <!-- code owner -->
+
+                    <small class="text-muted"> owner var </small> <!-- code owner -->
                   </div>
                 </div>
+
+
               </div>
             </div>
+
+
+            <% }%>
+
           </form>
-
-          <% }) %>
-
-
         </div>
       </div>
     </div>
@@ -77,3 +90,11 @@
 
 
 <%- include("footer") -%>
+
+
+
+<!-- for (var i = 0, len = arr.length; i < len; i++) { someFn(arr[i]);  }  -->
+<!-- -------------------------------  -->
+
+<!-- const array_name = ['a', 'b', 'c'];  -->
+<!-- array_name.forEach(function () {} ); -->

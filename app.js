@@ -127,7 +127,7 @@ const AlbumsSchema = {
   }
 };
 
-//_____________________________________________________________________________collection
+//_____________________________________________________________________________album collection
 
 const Albums = mongoose.model("Albums", AlbumsSchema);
 //_____________________________________________________________________________insert albums
@@ -151,7 +151,7 @@ var albumDataDefault = {
 Albums.create(albumDataDefault);
 */
 
-//_____________________________________________________________________________collection
+//_____________________________________________________________________________user collection
 
 
 //authenticate input against database
@@ -201,18 +201,31 @@ var User = mongoose.model('User', UserSchema);
 function visibleBtnHeader(req, res) {
   var N = "none";
   var I = "inline";
-  // if user is loging in the display attribute for buttons will change
+  // if user is loging in --> the display attribute for buttons will change
   if (req.session.userId != null) {
     //first value for btnVisability in header.ejs (button: login )
     //second for btnVisabilityOut in header.ejs (button: logout )
-  //third for btnVisabilityProfile in header.ejs (button: my profile )
-    return [N, I , I];
+    //third for btnVisabilityProfile in header.ejs (button: my profile )
+    return [N, I, I];
   } else {
     return [I, N, N];
   }
 }
+//______________________________________________________________________________functions
 
+//function to control add album button appearance
+function visibleBtnAlbum(req, res) {
+  var N = "none";
+  var I = "inline";
+  // if user is loging in --> the display attribute for buttons will change
+  if (req.session.userId != null) {
+    //first value for btnVisabilityAdd in header.ejs (button: album )
 
+    return I;
+  } else {
+    return N;
+  }
+}
 //_______________________________________________________________________________routes main
 
 // send home file to this url
@@ -358,10 +371,10 @@ app.post('/signup', function(req, res, next) {
   //} //end if
 
 });
-//_______________________________________________________________________________profile
+//_______________________________________________________________________________profile routes
 
 
-// GET route after registering
+// send profile file to this url
 app.get('/profile', function(req, res, next) {
   var visability = visibleBtnHeader(req, res);
 
@@ -390,7 +403,7 @@ app.get('/profile', function(req, res, next) {
 
 //_______________________________________________________________________________loguot
 
-// GET for logout logout
+// GET for logout
 app.get('/logout', function(req, res, next) {
   if (req.session) {
     // delete session object
@@ -405,9 +418,9 @@ app.get('/logout', function(req, res, next) {
 });
 
 
-//_______________________________________________________________________________membership
+//_______________________________________________________________________________membershipCheck
 
-// GET for logout logout
+// GET for membershipCheck
 app.post('/membershipCheck', function(req, res, next) {
   // Always the value attribute of elements will send in submit form (from client to server)
   // memberBtn is the name of buttons in pricinig.ejs
@@ -439,25 +452,38 @@ app.post('/membershipCheck', function(req, res, next) {
 
 // send albums data to this url
 app.get('/albums', function(req, res, next) {
+  //button visiibility
   var visability = visibleBtnHeader(req, res);
+  var addalbumbutton = visibleBtnAlbum(req, res);
 
   Albums.findOne(function(err, foundAlbums) {
     if (!err) {
-      /*    if (!foundAlbums) {
+      if (!foundAlbums) {
         return res.render("albums", {
           btnVisability: visability[0],
           btnVisabilityOut: visability[1],
-          newAlbums: ""
+          btnVisabilityProfile: visability[2],
+          btnVisabilityAdd: addalbumbutton,
+          newAlbums: ['']
         });
-*/
-      //    } else {
-      return res.render("albums", {
-        btnVisability: visability[0],
-        btnVisabilityOut: visability[1],
-        btnVisabilityProfile: visability[2],
-        newAlbums: foundAlbums
-      });
-      //  }
+
+
+//console.log(err);
+} else {
+        return res.render("albums", {
+          btnVisability: visability[0],
+          btnVisabilityOut: visability[1],
+          btnVisabilityProfile: visability[2],
+          btnVisabilityAdd: addalbumbutton,
+          newAlbums: foundAlbums
+
+        });
+
+        //console.log(foundAlbums);
+      }
+    }   // end no errors
+    else{
+      console.log(err);
     }
   });
 
@@ -469,7 +495,7 @@ app.get('/albums', function(req, res, next) {
 app.post('/addAlbums', function(req, res, next) {
   //control buttons appearance
   var visability = visibleBtnHeader(req, res);
-//get user email as a key
+  //get user email as a key
   var uservar = "";
   User.findById(req.session.userId)
     .exec(function(error, user) {
@@ -480,8 +506,8 @@ app.post('/addAlbums', function(req, res, next) {
       }
     });
 
-// catch checkboxes status   < err1-->[] err2-->"" >
-  var booleanACodeType=[];
+  // catch checkboxes status   < err1-->[] err2-->"" >
+  var booleanACodeType = [];
   if (req.body.htmlCode == "true") {
     booleanACodeType[0] = true;
   } else {
@@ -499,7 +525,7 @@ app.post('/addAlbums', function(req, res, next) {
   }
 
 
-//check if user logged in
+  //check if user logged in
   if (req.session.userId != null) {
 
     //create var to make doc
@@ -525,7 +551,7 @@ app.post('/addAlbums', function(req, res, next) {
         console.log("album added successfully");
 
         // go addalbums function in app.js
-        return res.redirect('/addalbums');  //albums
+        return res.redirect('/addalbums'); //albums
       }
     });
   } //end if log in
