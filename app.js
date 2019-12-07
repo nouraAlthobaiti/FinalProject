@@ -293,7 +293,16 @@ app.get('/signup', function(req, res, next) {
 
   //res.sendFile(__dirname + '/signup.html');
 });
+//_______________________________________________________________________________routes userManual
 
+app.get('/userManual', function(req, res, next)
+{
+res.sendFile(__dirname + "/manual.html");
+});
+app.get('/rules', function(req, res, next)
+{
+res.sendFile(__dirname + "/rules.html");
+});
 //_______________________________________________________________________________sign in
 app.post('/login', function(req, res, next) {
   if (req.body.logemail && req.body.logpassword) {
@@ -560,8 +569,11 @@ app.post('/addAlbums', function(req, res, next) {
     return res.redirect('/login');
   }
 });
+//_______________________________________________________________________________userManual
+app.post('/userManual', function(req, res, next) {
+res.senf("successfully");
+});
 //_______________________________________________________________________________server port
-
 
 //server port
 app.listen(3000, function() {

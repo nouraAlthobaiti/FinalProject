@@ -197,6 +197,11 @@ h1 title {
 
 h5
 {color: gray;}
+u
+{
+color: #b54963;
+font-weight: bolder;
+}
 /*not used insteade of it i use <div class="container-fluid" style="padding:0;"> to fill the page*/
 
 .container {
@@ -492,6 +497,8 @@ margin-right: 400px;
   color: #88b2ad;
   font-weight: bolder;
 }
+
+/*button styles*/
 .Fbtn
 {
    background: -moz-linear-gradient(top, #B54963, #CF5371);
