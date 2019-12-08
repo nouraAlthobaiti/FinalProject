@@ -630,14 +630,20 @@ app.post('/updateAlbum', function(req, res, next) {
   }
 
 
+console.log(req.body.editButton);
+
+console.log(req.body.updateTitle);
+
+console.log(req.session.userName);
+
   //update
   if (req.body.updateTitle != null) {
-    Albums.findOneAndUpdate({ ownerName: req.session.userName, _id: updateButton}, { title: req.body.updateTitle },
+    Albums.findOneAndUpdate({ ownerName: req.session.userName, _id: req.body.editButton}, { title: req.body.updateTitle },
 
       (function(err)
 
        {if (err) { return next(err); }
-        else { console.log(req.body.title);
+        else { console.log(req.body.editButton);
           res.redirect("/myalbums"); //redirect to albums function in app.js
 
           //  editAlbumMsg: "updated successfully", //var in my albums
