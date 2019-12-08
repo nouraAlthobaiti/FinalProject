@@ -222,10 +222,11 @@ function visibleBtnAlbum(req, res) {
   // if user is loging in --> the display attribute for buttons will change
   if (req.session.userId != null) {
     //first value for btnVisabilityAdd in header.ejs (button: album )
+    //first value for btnVisabilityMy in header.ejs (button: myalbum )
 
-    return I;
+    return [I, I];
   } else {
-    return N;
+    return [N, N];
   }
 }
 //_______________________________________________________________________________routes main
@@ -247,6 +248,7 @@ app.get('/', function(req, res, next) {
 app.get('/addalbums', function(req, res, next) {
   var visability = visibleBtnHeader(req, res);
   return res.render("addalbums", {
+    noAlbumMsg: "",
     btnVisability: visability[0],
     btnVisabilityOut: visability[1],
     btnVisabilityProfile: visability[2]
@@ -297,13 +299,11 @@ app.get('/signup', function(req, res, next) {
 });
 //_______________________________________________________________________________routes userManual
 
-app.get('/userManual', function(req, res, next)
-{
-res.sendFile(__dirname + "/manual.html");
+app.get('/userManual', function(req, res, next) {
+  res.sendFile(__dirname + "/manual.html");
 });
-app.get('/rules', function(req, res, next)
-{
-res.sendFile(__dirname + "/rules.html");
+app.get('/rules', function(req, res, next) {
+  res.sendFile(__dirname + "/rules.html");
 });
 //_______________________________________________________________________________sign in
 app.post('/login', function(req, res, next) {
@@ -495,10 +495,52 @@ app.get('/albums', function(req, res, next) {
       btnVisability: visability[0],
       btnVisabilityOut: visability[1],
       btnVisabilityProfile: visability[2],
-      btnVisabilityAdd: addalbumbutton,
+      btnVisabilityAdd: addalbumbutton[0],
+      btnVisabilityMy: addalbumbutton[1],
       newAlbums: foundAlbums
     });
 
+  });
+
+});
+
+//_______________________________________________________________________________routes my albums
+// send myalbums file to this url & display my albums
+
+// send my albums data to this url
+app.get('/myalbums', function(req, res, next) {
+  //button visiibility
+  var visability = visibleBtnHeader(req, res);
+  var addalbumbutton = visibleBtnAlbum(req, res);
+
+  Albums.find({
+    ownerName: req.session.userName
+  }, function(err, foundAlbums) {
+
+    if (foundAlbums.length === 0) {
+      // go addalbums function in app.js
+      //To render views/list.ejs and send the markers values
+      res.render("addalbums", {
+        noAlbumMsg: "لا يوجد لديك اكواد يمكنك اضافتها الان",
+        btnVisability: visability[0],
+        btnVisabilityOut: visability[1],
+        btnVisabilityProfile: visability[2],
+        btnVisabilityAdd: addalbumbutton[0],
+        btnVisabilityMy: addalbumbutton[1],
+        newAlbums: foundAlbums
+      });
+      
+    } else {
+      //To render views/list.ejs and send the markers values
+      res.render("myalbums", {
+        btnVisability: visability[0],
+        btnVisabilityOut: visability[1],
+        btnVisabilityProfile: visability[2],
+        btnVisabilityAdd: addalbumbutton[0],
+        btnVisabilityMy: addalbumbutton[1],
+        newAlbums: foundAlbums
+      });
+    }
   });
 
 });
@@ -557,7 +599,7 @@ app.post('/addAlbums', function(req, res, next) {
 });
 //_______________________________________________________________________________userManual
 app.post('/userManual', function(req, res, next) {
-res.senf("successfully");
+  res.senf("successfully");
 });
 //_______________________________________________________________________________server port
 

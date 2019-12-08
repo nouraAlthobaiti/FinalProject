@@ -23,19 +23,19 @@
         <h1 class="jumbotron-heading">مكتبة كودي </h1>
         <p class="lead text-muted"> إليك مجموعة من الأدوات و الأكواد التي تجعل تصميمك أكثر جاذبية وَ مرونة ، بإمكانك شراء أيًّا منها ، كما يمكنك عرض أي محتوى يفيد مطوري المواقع للبيع </p>
         <p>
-          <a href="/" class="Dbtn btn-primary my-2">الرئيسية</a>
+          <a href="/myAlbums" class="Dbtn btn-primary my-2" style="display:">اكوادك هنا</a>
           <a href="/membership" class="Dbtn btn-secondary my-2">حدث عضويتك</a>
 
           <!-- enable add form -->
           <!--  <a href="/addnewAlbumss" class="Dbtn btn-primary my-2" onclick="displayForm()" id="checkToAdd">اضف كودك</a>  -->
-          <a href="/addAlbums" class="Dbtn btn-primary my-2" style="display:<%= btnVisabilityAdd %>"> اضف كودك </a>
+          <a href="/addAlbums" class="Dbtn btn-primary my-2" style="display:<%= btnVisabilityAdd %>">اضف كود جديد</a>
 
         </p>
       </div>
     </section>
 
 
-    <h4> تجد جميع الاكواد هنا </h4>
+    <h4> اهلا <%= album.ownerName %> تجد جميع اكوادك هنا </h4>
     <div class="album py-5 bg-light">
       <div class="container">
         <!-- to display albums as rows -->
@@ -46,20 +46,22 @@
           <% newAlbums.forEach(function(album){ %>
           <div class="col-md-4">
             <div class="card mb-4 shadow-sm">
-              <form class="" action="/albums" method="post">
+              <form class="" action="/myalbums" method="post" onload="checkCode();">
+
+                <b class="card-text"> عنوان الكود : <%= album.title %> </b>
 
                 <svg class="bd-placeholder-img card-img-top" width="100%" height="225" xmlns="http://www.w3.org/2000/svg" preserveAspectRatio="xMidYMid slice" focusable="false" role="img" aria-label="Placeholder: Thumbnail">
                   <title>أكواد</title>
-                  <rect width="100%" height="100%" fill="#55595c" /><text x="50%" y="50%" fill="#eceeef" dy=".3em"><%= album.description %></text>
+                  <rect width="100%" height="100%" fill="#55595c" />
+                  <text x="50%" y="50%" fill="#eceeef" dy=".3em"> الوصف: <%= album.description %> </text>
                 </svg>
 
                 <div class="card-body">
-                  <p class="card-text"> <%= album.title %> </p>
+                  <p class="card-text" id="codeType"> نوع الكود: <%= album.codeType %></p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
                       <button type="button" class="btn Abtn btn-sm btn-outline-secondary"> معاينة 👁 </button>
-                      <button type="button" class="btn  Abtn btn-sm btn-outline-secondary"> احصل عليه ب  <%= album.cost %> $ </button>
-                      <button type="submit" class="btn  Abtn btn-sm btn-outline-secondary" name="checkbox" value="<%= album._id %>">حذف</button>
+                      <button type="button" class="btn  Abtn btn-sm btn-outline-secondary"> احصل عليه ب <%= album.cost %> $ </button>
                     </div>
                     <small class="text-muted"> الناشر : <%= album.ownerName %> </small> <!-- code owner -->
                   </div>
