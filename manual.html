@@ -28,11 +28,10 @@
 
  <!-- page icon -->
  <link rel="icon" href="img/icon.ico">
- <title>كودي</title >
+ <title>كودي</title>
 </head>
 
 <body>
-  <center>
  <!--basic page container-->
  <div class="container-fluid" style="padding:0;">
 
@@ -50,10 +49,10 @@
          <button class="Sbtn" id="logBtn" style="display:<%= btnVisability %>">تسجيل جديد </button>
        </form>
        <form method="get" action="/logout">
-         <button class="Sbtn" id="logBtn" style="display:<%= btnVisabilityOut %>"> خروج </button>
+         <button class="Pbtn" id="logBtn" style="display:<%= btnVisabilityOut %>"> <img src="img\out.png" width="30" height="30"> </button>
        </form>
        <form method="get" action="/profile">
-         <button class="Pbtn" id="logBtn" style="display:<%= btnVisabilityOut %>"> <img src="img\user.png" width="30" height="30"> </button>
+         <button class="Pbtn" id="logBtn" style="display:<%= btnVisabilityProfile %>"> <img src="img\user.png" width="30" height="30"> </button>
        </form>
        <ul class="navbar-nav mr-auto">
          <li class="nav-item">
@@ -93,7 +92,7 @@
        </div>
      </nav>
    </header>
-
+<center>
 
 <h5 style="margin-top: 50px;">عزيزي متصفح موقع كودي ، إليك دليل استخدام الموقع حتى نضمن أنّك استفدت من جميع الخدمات التي يقدّمها الموقع </h5>
 <h6>انقر على الصورة للتحميل </h6>
@@ -116,20 +115,53 @@
 </form>
 <!-- important links -->
 <section class="sec9">
-  <p class="info_paragraph" id="aboutsite">عن موقعنا</p>
-  <p class="info_paragraph" id="oursections">الاقسام</p>
-  <p class="info_paragraph" id="contact">تواصل معنا</p>
+
+  <div class="dropdown-menu">
+    <span class="dropdown-item-text">Dropdown item text</span>
+    <a class="dropdown-item" href="#">Action</a>
+    <a class="dropdown-item" href="#">Another action</a>
+    <a class="dropdown-item" href="#">Something else here</a>
+  </div>
+
+<div class="w3-row w3-center w3-small">
+
+
+    <div  class=" details info_paragraph w3-col l3 m6 s12">
+      <p style="color:#88b2ad;" align="center" id="aboutsite">عن موقعنا</p>
+      هذا الموقع يعرض اكواد مختلفة لاغراض مختلفة ويسمح للمستخدمين بالمشاركة باكوادهم معنا وعرضها للبيع اذا رغبوا في ذلك
+    </div>
+
+    <div  class=" details info_paragraph w3-col l3 m6 s12">
+      <p style="color:#88b2ad;"id="oursections" align="center">الاقسام</p>
+      هذا الموقع يخدم اكواد
+      html
+      و
+      css
+      و
+      javascript
+      للسماح للمستخدمين ايجاد و تحميل الانواع المختلفة من الاكواد
+       ويتسع لاضافة انواع اخرى
+
+    </div>
+    <div class="details info_paragraph w3-col l3 m6 s12">
+      <p style="color:#88b2ad;" id="contact" align="center">تواصل معنا</p>
+      يمكنك التواصل معنا عن طريق مواقع التواصل الاجتماعي و متابعة جديدنا على قناتنا في اليوتيوب وأيضًا التواصل معنا على
+cody@gmail.com
+    </div>
+
+</div>
+
 </section>
 
 <!-- footer -->
 <section class="footer">
-  <b>©كل الحقوق محفوظة لموقع ساحة المصورين</b>
+  <b style="color:#88b2ad;">كل الحقوق محفوظة لدى <strong>كودي</strong></b><br />
 
-  <button class="btn"onclick="location.href='https://twitter.com/'"><i class="fab fa-twitter-square fa-2x"></i></button>
-  <button class="btn" onclick="location.href='https://www.instagram.com/'"><i class="fab fa-instagram fa-2x"></i></button>
-  <button class="btn" onclick="location.href='https://www.facebook.com/'"><i class="fab fa-facebook-square fa-2x"></i></button>
-  <button class="btn"onclick="location.href='https://www.youtube.com/'"><i class="fab fa-youtube-square fa-2x"></i></button>
-  <button class="btn"onclick="location.href='https://www.linkedin.com/'"><i class="fab fa-linkedin-in fa-2x"></i></i></button>
+  <a href="https://twitter.com" target="_blank"> <button class="btn"> <i class="fab fa-twitter-square fa-2x"> </i> </button> </a>
+  <a href="https://www.instagram.com" target="_blank"> <button class="btn"><i class="fab fa-instagram fa-2x"></i></button> </a>
+  <a href="https://www.facebook.com/" target="_blank"> <button class="btn"><i class="fab fa-facebook-square fa-2x"></i></button> </a>
+  <a href="https://www.youtube.com" target="_blank"> <button class="btn"><i class="fab fa-youtube-square fa-2x"></i></button> </a>
+  <a href="https://sa.linkedin.com" target="_blank"> <button class="btn"><i class="fab fa-linkedin-in fa-2x"></i> </button> </a>
 </section>
 
 </div>
@@ -145,6 +177,7 @@
 <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 <!--link icon in footer to website-->
 <script src="https://kit.fontawesome.com/30e6357a52.js" crossorigin="anonymous"></script>
+
 
   </center>
 </body>

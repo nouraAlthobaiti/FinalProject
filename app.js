@@ -300,6 +300,7 @@ app.get('/signup', function(req, res, next) {
 //_______________________________________________________________________________routes userManual
 
 app.get('/userManual', function(req, res, next) {
+  var visability = visibleBtnHeader(req, res);
   res.sendFile(__dirname + "/manual.html");
 });
 app.get('/rules', function(req, res, next) {
@@ -529,7 +530,7 @@ app.get('/myalbums', function(req, res, next) {
         btnVisabilityMy: addalbumbutton[1],
         newAlbums: foundAlbums
       });
-      
+
     } else {
       //To render views/list.ejs and send the markers values
       res.render("myalbums", {
@@ -602,18 +603,7 @@ app.post('/userManual', function(req, res, next) {
   res.senf("successfully");
 });
 //_______________________________________________________________________________server port
-var idx = lunr(function () {
-  this.field('title')
-  this.field('body')
 
-  this.add({
-    "title": "Twelfth-Night",
-    "body": "If music be the food of love, play on: Give me excess of it…",
-    "author": "William Shakespeare",
-    "id": "1"
-  })
-})
-idx.search("love")
 //server port
 app.listen(3000, function() {
   console.log("Server started on port 3000");
