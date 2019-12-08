@@ -18,7 +18,7 @@
 <center>
   <main role="main">
     <section class="jumbotron text-center">
-      <div class="container">
+      <div class="container-fluid">
         <h1 class="jumbotron-heading">مكتبة كودي </h1>
         <p class="lead text-muted"> إليك مجموعة من الأدوات و الأكواد التي تجعل تصميمك أكثر جاذبية وَ مرونة ، بإمكانك شراء أيًّا منها ، كما يمكنك عرض أي محتوى يفيد مطوري المواقع للبيع </p>
         <p>
@@ -42,35 +42,35 @@
 
 
           <!-- add new codes  -->
-          <form class="" action="/updateAlbum" method="post" style="align:center;" <!--style="display:none;" id="add" -->>
+          <form class="" action="/myalbums" method="post" style="align:center;" <!--style="display:none;" id="add" -->>
 
             <label for="checkType"> <u> تحديث نوع الكود </u> </label> <br>
-            <input type="checkbox" name="htmlCode" value="true"> HTML <br>
+            <input <%= htmlChecked %> type="checkbox" name="htmlCode" value="true"> HTML <br>
 
-            <input type="checkbox" name="javascriptCode" value="true"> JAVA SCRIPT <br>
+            <input <%= jsChecked %> type="checkbox" name="javascriptCode" value="true"> JAVA SCRIPT <br>
 
-            <input type="checkbox" name="cssCode" value="true"> CSS <br> <br>
+            <input <%= cssChecked %> type="checkbox" name="cssCode" value="true"> CSS <br> <br>
 
             <label for="keyword"><u>نوع اخر؟</u></label> <br>
-            <input type="text" name="keyword" value="" placeholder="كلمات دلالية"> <br>
+            <input type="text" name="keyword" value="<%= keyword %>" placeholder="كلمات دلالية"> <br>
 
             <hr class="hr-line">
 
             <label for="title"> <u>تحديث عنوان الكود</u></label> <br>
-            <input type="text" name="updateTitle" value="" placeholder=" تحديث عنوان الكود"> <br>
+            <input type="text" name="updateTitle" value="<%= updateTitleVar %>" placeholder=" تحديث عنوان الكود"><br>
 
             <label for="code"><u>   تحديث الكود هنا </u> </label> <br>
-            <textarea name="code" rows="8" cols="80" placeholder=" تحديث الكود هنا"></textarea> <br>
+            <textarea name="code" rows="8" cols="80" placeholder=" تحديث الكود هنا"><%= updateCodeVar %></textarea><br>
 
             <label for="description"><u> تحديث الوصف هنا</u></label> <br>
-            <textarea name="updateDescription" rows="5" cols="80" placeholder="تحديث الوصف هنا"></textarea> <br>
+            <textarea name="updateDescription" rows="5" cols="80" placeholder="تحديث الوصف هنا"><%= updateDecVar %> </textarea> <br>
 
             <label for="cost"> <u>  تحديث السعر </u> </label> <br>
-            <input type="text" name="updateCost" value=""  placeholder=" تحديث سعر الكود" /> <br>
+            <input type="text" name="updateCost" value="<%= updateCostVar %>"  placeholder=" تحديث سعر الكود" /><br>
 
 
 
-            <button type="submit" name="button" class="Dbtn"> تحديث  </button>
+            <button type="submit" name="albumIdButton" class="Dbtn" value="<%= idUpdate %>"> تحديث  </button>
 
           </form>
 
