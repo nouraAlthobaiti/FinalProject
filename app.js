@@ -79,79 +79,8 @@ var UserSchema = new mongoose.Schema({
     required: true,
   }
 });
-//_______________________________________________________________________________album schema
 
-const AlbumsSchema = {
-  /*  user_email: {
-      type: String,
-      unique: true,
-      required: true,
-      trim: true,
-    },*/
-  title: {
-    type: String,
-    required: false
-  },
-  code: {
-    type: String,
-    required: true,
-    unique: true,
-  },
-  cost: {
-    type: Number,
-    required: false,
-    //default: 0,
-  },
-  description: {
-    type: String,
-    required: false
-  },
-  htmlCode: {
-    type: Boolean,
-    default: false,
-    required: false
-  },
-  javascriptCode: {
-    type: Boolean,
-    default: false,
-    required: false
-  },
-  cssCode: {
-    type: Boolean,
-    default: false,
-    required: false
-  },
-  keyword: {
-    type: String,
-    required: false
-  }
-};
-
-//_____________________________________________________________________________album collection
-
-const Albums = mongoose.model("Albums", AlbumsSchema);
-//_____________________________________________________________________________insert albums
-
-/*
-//create var to make doc
-
-var albumDataDefault = {
-  user: { email:"nora@gmail.com" , username:"nora" , password:"123",membership:0 },
-  title: "navbar",
-  code: "<h1>",
-  cost: 500,
-  description: "test album",
-  htmlCode: true,
-  javascriptCode: false,
-  cssCode: false,
-  keyword: "no"
-};
-
-//create doc
-Albums.create(albumDataDefault);
-*/
-
-//_____________________________________________________________________________user collection
+//_____________________________________________________________________________authenticate steps/ hash password /user collection
 
 
 //authenticate input against database
@@ -192,7 +121,80 @@ UserSchema.pre('save', function(next) {
 
 //create collection
 var User = mongoose.model('User', UserSchema);
+//_______________________________________________________________________________album schema
 
+const AlbumsSchema = {
+  ownerName: {
+    type: String,
+    //unique: true,
+    required: true,
+  },
+  title: {
+    type: String,
+    required: false
+  },
+  code: {
+    type: String,
+    required: true,
+    unique: true,
+  },
+  cost: {
+    type: Number,
+    required: false,
+    //default: 0,
+  },
+  description: {
+    type: String,
+    required: false
+  },
+  codeType: {
+    type: String,
+    required: false
+  }
+};
+
+//_____________________________________________________________________________album collection
+
+const Albums = mongoose.model("Albums", AlbumsSchema);
+//_____________________________________________________________________________insert albums
+const album1 = new Albums({
+  ownerName: "admin_nassebah",
+  title: "First Code",
+  code: "<h1>Hi</h1>",
+  cost: 0,
+  description: "First code",
+  codeType: "html"
+
+});
+
+const album2 = new Albums({
+  ownerName: "admin_wafa'a",
+  title: "Second Code",
+  code: "<h2>Hi</h2>",
+  cost: 250,
+  description: "Second code",
+  codeType: "css"
+});
+
+const album3 = new Albums({
+  ownerName: "admin_nora",
+  title: "Third Code",
+  code: "<h3>Hi</h3>",
+  cost: 500,
+  description: "Third code",
+  codeType: "js"
+});
+
+const defaultAlbums = [album1, album2, album3];
+/*
+//_______________________________________________________________________________Ownership Schema
+const OwnershipSchema = {
+  //  owner: String,
+  albums: [AlbumsSchema]
+};
+//_____________________________________________________________________________owner collection
+const Owners = mongoose.model("Owners", OwnershipSchema);
+*/
 //_______________________________________________________________________________
 //_______________________________________________________________________________
 //_______________________________________________________________________________functions
@@ -296,6 +298,9 @@ app.get('/signup', function(req, res, next) {
 
 //_______________________________________________________________________________sign in
 app.post('/login', function(req, res, next) {
+
+  var visability = visibleBtnHeader(req, res);
+
   if (req.body.logemail && req.body.logpassword) {
     User.authenticate(req.body.logemail, req.body.logpassword, function(error, user) {
       //  req.body.errmail.style.visibility="hidden";
@@ -304,12 +309,13 @@ app.post('/login', function(req, res, next) {
 
         return res.render("login", {
           errmail: 'البريد الالكتروني أو كلمة المرور خاطئة',
-          btnVisability: "inline",
-          btnVisabilityOut: "none‏",
-          btnVisabilityProfile: "none"
+          btnVisability: visability[0],
+          btnVisabilityOut: visability[1],
+          btnVisabilityProfile: visability[2]
         });
       } else {
         req.session.userId = user._id;
+        req.session.userName = user.username;
         return res.redirect('/');
       }
     });
@@ -331,20 +337,23 @@ app.post('/login', function(req, res, next) {
 //_______________________________________________________________________________sign up
 app.post('/signup', function(req, res, next) {
 
+  var visability = visibleBtnHeader(req, res);
+
   // confirm that user typed same password twice
   if (req.body.password !== req.body.passwordConf) {
-    var err = new Error('Passwords do not match. :( ');
-    err.status = 400;
-    res.send("passwords dont match :.( ");
-    return next(err);
+    return res.render("signup", {
+      repeatedAccMsg: "كلمة المرور غير متطابقة مع التأكيد!",
+      btnVisability: visability[0],
+      btnVisabilityOut: visability[1],
+      btnVisabilityProfile: visability[2]
+    });
   }
-
   //if they all entered <sign up>
   /*if (req.body.email &&
-    req.body.username &&
-    req.body.password &&
-    req.body.passwordConf) {
-*/
+      req.body.username &&
+      req.body.password &&
+      req.body.passwordConf) {
+  */
   //create var to make doc
   var userData = {
     email: req.body.email,
@@ -357,13 +366,17 @@ app.post('/signup', function(req, res, next) {
   User.create(userData, function(error, user) {
     if (error) {
       return res.render("signup", {
-        repeatedAccMsg: "هذا الايميل مستخدم !"
+        repeatedAccMsg: "هذا الايميل مستخدم !",
+        btnVisability: visability[0],
+        btnVisabilityOut: visability[1],
+        btnVisabilityProfile: visability[2]
       });
     } else {
 
 
       User.authenticate(req.body.email, req.body.password, function(error, user) {
         req.session.userId = user._id;
+        req.session.userName = user.username;
         return res.redirect('/');
       });
     }
@@ -456,72 +469,48 @@ app.get('/albums', function(req, res, next) {
   var visability = visibleBtnHeader(req, res);
   var addalbumbutton = visibleBtnAlbum(req, res);
 
-  Albums.findOne(function(err, foundAlbums) {
-    if (!err) {
-      if (!foundAlbums) {
-        return res.render("albums", {
-          btnVisability: visability[0],
-          btnVisabilityOut: visability[1],
-          btnVisabilityProfile: visability[2],
-          btnVisabilityAdd: addalbumbutton,
-          newAlbums: ['']
-        });
+  Albums.find({}, function(err, foundAlbums) {
 
-
-//console.log(err);
-} else {
-        return res.render("albums", {
-          btnVisability: visability[0],
-          btnVisabilityOut: visability[1],
-          btnVisabilityProfile: visability[2],
-          btnVisabilityAdd: addalbumbutton,
-          newAlbums: foundAlbums
-
-        });
-
-        //console.log(foundAlbums);
-      }
-    }   // end no errors
-    else{
-      console.log(err);
+    if (foundAlbums.length === 0) {
+      Albums.insertMany(defaultAlbums, function(err) {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log("Successfully savevd default items to DB.");
+        }
+      });
+      res.redirect("/albums"); //redirect to albums function in app.js
     }
-  });
+    //To render views/list.ejs and send the markers values
+    res.render("albums", {
+      btnVisability: visability[0],
+      btnVisabilityOut: visability[1],
+      btnVisabilityProfile: visability[2],
+      btnVisabilityAdd: addalbumbutton,
+      newAlbums: foundAlbums
+    });
 
+  });
 
 });
 //_______________________________________________________________________________add albums
 
 // send albums data to this url
 app.post('/addAlbums', function(req, res, next) {
-  //control buttons appearance
-  var visability = visibleBtnHeader(req, res);
-  //get user email as a key
-  var uservar = "";
-  User.findById(req.session.userId)
-    .exec(function(error, user) {
-      if (error) {
-        return next(error);
-      } else {
-        uservar = user.email;
-      }
-    });
 
   // catch checkboxes status   < err1-->[] err2-->"" >
-  var booleanACodeType = [];
+  //  var booleanACodeType = [];
+  var booleanACodeType;
   if (req.body.htmlCode == "true") {
-    booleanACodeType[0] = true;
+    booleanACodeType = "html";
+
+  } else if (req.body.javascriptCode == "true") {
+    booleanACodeType = "java script";
+
+  } else if (req.body.cssCode == "true") {
+    booleanACodeType = "css";
   } else {
-    booleanACodeType[0] = false;
-  }
-  if (req.body.javascriptCode == "true") {
-    booleanACodeType[1] = true;
-  } else {
-    booleanACodeType[1] = false;
-  }
-  if (req.body.cssCode == "true") {
-    booleanACodeType[2] = true;
-  } else {
-    booleanACodeType[2] = false;
+    booleanACodeType = req.body.keyword;
   }
 
 
@@ -530,16 +519,13 @@ app.post('/addAlbums', function(req, res, next) {
 
     //create var to make doc
     var albumData = {
-      //user_email: uservar,
+      ownerName: req.session.userName,
       title: req.body.title,
       code: req.body.code,
       cost: Number(req.body.costType, 10), // string in number
       //  cost: req.body.costType,
       description: req.body.description,
-      htmlCode: booleanACodeType[0],
-      javascriptCode: booleanACodeType[1],
-      cssCode: booleanACodeType[2],
-      keyword: req.body.keyword
+      codeType: booleanACodeType
     };
 
     //create doc
