@@ -574,7 +574,18 @@ app.post('/userManual', function(req, res, next) {
 res.senf("successfully");
 });
 //_______________________________________________________________________________server port
+var idx = lunr(function () {
+  this.field('title')
+  this.field('body')
 
+  this.add({
+    "title": "Twelfth-Night",
+    "body": "If music be the food of love, play on: Give me excess of it…",
+    "author": "William Shakespeare",
+    "id": "1"
+  })
+})
+idx.search("love")
 //server port
 app.listen(3000, function() {
   console.log("Server started on port 3000");

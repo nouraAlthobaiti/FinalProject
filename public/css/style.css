@@ -502,7 +502,11 @@ margin-right: 400px;
   color: #88b2ad;
   font-weight: bolder;
 }
-
+.details
+{
+  color:#fbefc4;
+  font-weight: lighter;
+}
 /*button styles*/
 .Fbtn
 {
