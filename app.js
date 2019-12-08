@@ -214,9 +214,9 @@ function visibleBtnHeader(req, res) {
     //first value for btnVisability in header.ejs (button: login )
     //second for btnVisabilityOut in header.ejs (button: logout )
     //third for btnVisabilityProfile in header.ejs (button: my profile )
-    return [N, I, I];
+    return [N, I];
   } else {
-    return [I, N, N];
+    return [I, N];
   }
 }
 //______________________________________________________________________________functions
@@ -243,7 +243,6 @@ app.get('/', function(req, res, next) {
   return res.render("index", {
     btnVisability: visability[0],
     btnVisabilityOut: visability[1],
-    btnVisabilityProfile: visability[2]
   });
 
 });
@@ -260,7 +259,6 @@ app.get('/login', function(req, res, next) {
     errmail: '',
     btnVisability: visability[0],
     btnVisabilityOut: visability[1],
-    btnVisabilityProfile: visability[2]
   });
 
   //res.sendFile(__dirname + '/login.html');
@@ -281,7 +279,6 @@ app.post('/login', function(req, res, next) {
           errmail: 'البريد الالكتروني أو كلمة المرور خاطئة',
           btnVisability: visability[0],
           btnVisabilityOut: visability[1],
-          btnVisabilityProfile: visability[2]
         });
       } else {
         req.session.userId = user._id;
@@ -313,7 +310,6 @@ app.get('/signup', function(req, res, next) {
     repeatedAccMsg: '',
     btnVisability: visability[0],
     btnVisabilityOut: visability[1],
-    btnVisabilityProfile: visability[2]
   });
 
   //res.sendFile(__dirname + '/signup.html');
@@ -330,7 +326,6 @@ app.post('/signup', function(req, res, next) {
       repeatedAccMsg: "كلمة المرور غير متطابقة مع التأكيد!",
       btnVisability: visability[0],
       btnVisabilityOut: visability[1],
-      btnVisabilityProfile: visability[2]
     });
   }
   //if they all entered <sign up>
@@ -354,7 +349,6 @@ app.post('/signup', function(req, res, next) {
         repeatedAccMsg: "هذا الايميل مستخدم !",
         btnVisability: visability[0],
         btnVisabilityOut: visability[1],
-        btnVisabilityProfile: visability[2]
       });
     } else {
 
@@ -408,7 +402,6 @@ app.get('/profile', function(req, res, next) {
             membership: user.membership,
             btnVisability: visability[0],
             btnVisabilityOut: visability[1],
-            btnVisabilityProfile: visability[2]
           }); //(/profile --> change url only) otherwise (render my ejs file)
         }
       }
@@ -425,7 +418,6 @@ app.get('/membership', function(req, res, next) {
   return res.render("membership", {
     btnVisability: visability[0],
     btnVisabilityOut: visability[1],
-    btnVisabilityProfile: visability[2]
   });
 });
 //_______________________________________________________________________________membershipCheck
@@ -482,7 +474,6 @@ app.get('/albums', function(req, res, next) {
     res.render("albums", {
       btnVisability: visability[0],
       btnVisabilityOut: visability[1],
-      btnVisabilityProfile: visability[2],
       btnVisabilityAdd: addalbumbutton[0],
       btnVisabilityMy: addalbumbutton[1],
       newAlbums: foundAlbums
@@ -512,7 +503,6 @@ app.get('/myalbums', function(req, res, next) {
         noAlbumMsg: "لا يوجد لديك اكواد يمكنك اضافتها الان",
         btnVisability: visability[0],
         btnVisabilityOut: visability[1],
-        btnVisabilityProfile: visability[2],
         btnVisabilityAdd: addalbumbutton[0],
         btnVisabilityMy: addalbumbutton[1],
         newAlbums: foundAlbums
@@ -524,7 +514,6 @@ app.get('/myalbums', function(req, res, next) {
         editAlbumMsg: "",
         btnVisability: visability[0],
         btnVisabilityOut: visability[1],
-        btnVisabilityProfile: visability[2],
         btnVisabilityAdd: addalbumbutton[0],
         btnVisabilityMy: addalbumbutton[1],
         newAlbums: foundAlbums
@@ -600,7 +589,6 @@ app.get('/addalbums', function(req, res, next) {
     noAlbumMsg: "",
     btnVisability: visability[0],
     btnVisabilityOut: visability[1],
-    btnVisabilityProfile: visability[2]
   });
 
 });
@@ -651,7 +639,7 @@ app.post('/addAlbums', function(req, res, next) {
         console.log("album added successfully");
 
         // go addalbums function in app.js
-        return res.redirect('/addalbums'); //albums
+        return res.redirect('/myalbums'); //albums
       }
     });
   } //end if log in
@@ -711,7 +699,6 @@ app.post('/updateAlbum', function(req, res, next) {
         return res.render("updateAlbum", {
           btnVisability: visability[0],
           btnVisabilityOut: visability[1],
-          btnVisabilityProfile: visability[2],
           updateTitleVar: album.title,
           updateCodeVar: album.code,
           updateCostVar: album.cost,
@@ -723,33 +710,18 @@ app.post('/updateAlbum', function(req, res, next) {
           keyword: keywordType
         });
       }
-      /*
-updateTitleVar = album.title;
-updateCodeVar = album.code;
-updateCostVar = album.cost;
-updateDecVar = album.description;
-idUpdate = album._id;*/
-      //codeType;
+
     }));
-
-  /*
-  ,
-  title: req.body.title,
-  code: req.body.code,
-  cost: Number(req.body.cost, 10), // string in number
-  //  cost: req.body.costType,
-  description: req.body.description,
-  codeType: booleanACodeType
-  */
-
-
 
 });
 //_______________________________________________________________________________routes userManual
 
 app.get('/userManual', function(req, res, next) {
   var visability = visibleBtnHeader(req, res);
-  res.sendFile(__dirname + "/manual.html");
+  res.render("manual", {
+    btnVisability: visability[0],
+    btnVisabilityOut: visability[1],
+  });
 });
 app.get('/rules', function(req, res, next) {
   res.sendFile(__dirname + "/rules.html");
