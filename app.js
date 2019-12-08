@@ -148,7 +148,7 @@ const AlbumsSchema = {
     required: false
   },
   codeType: {
-    type: String,
+    type: Array,
     required: false
   }
 };
@@ -533,6 +533,64 @@ app.get('/myalbums', function(req, res, next) {
   });
 
 });
+//_______________________________________________________________________________myalbums
+
+app.post('/myalbums', function(req, res, next) {
+
+  /*if(updateTitleVar == null || updateCodeVar == null || updateCostVar == null || updateDecVar== null)
+  {
+  "من فضلك! قم بتعبئة الخانات الفارغة"
+  }*/
+  // read code type
+  var booleanACodeType = [];
+  if (req.body.htmlCode == "true") {
+    booleanACodeType.push("html");
+  }
+  if (req.body.javascriptCode == "true") {
+    booleanACodeType.push("java script");
+  }
+  if (req.body.cssCode == "true") {
+    booleanACodeType.push("css");
+  }
+  if (req.body.keyword != null) {
+    booleanACodeType.push(req.body.keyword);
+  }
+  if (booleanACodeType == null) {
+    booleanACodeType.push(" ");
+  }
+
+  //update
+  Albums.findOneAndUpdate({
+      ownerName: req.session.userName,
+      _id: req.body.albumIdButton
+    }, {
+      title: req.body.updateTitle,
+      code: req.body.code,
+      cost: req.body.updateCost,
+      description: req.body.updateDescription,
+      codeType: booleanACodeType
+    },
+    (function(err)
+
+      {
+        if (err) {
+          return next(err);
+        } else {
+          console.log(req.body.editButton);
+
+          res.redirect('/myalbums');
+          //redirect to albums function in app.js
+
+          //  editAlbumMsg: "updated successfully", //var in my albums
+        }
+      }
+    )
+  );
+
+
+});
+
+
 //_______________________________________________________________________________routes add albums
 
 // send addalbums file to this url
@@ -553,19 +611,22 @@ app.post('/addAlbums', function(req, res, next) {
 
   // catch checkboxes status   < err1-->[] err2-->"" >
   //  var booleanACodeType = [];
-  var booleanACodeType;
+  var booleanACodeType = [];
   if (req.body.htmlCode == "true") {
-    booleanACodeType = "html";
-
-  } else if (req.body.javascriptCode == "true") {
-    booleanACodeType = "java script";
-
-  } else if (req.body.cssCode == "true") {
-    booleanACodeType = "css";
-  } else {
-    booleanACodeType = req.body.keyword;
+    booleanACodeType.push("html");
   }
-
+  if (req.body.javascriptCode == "true") {
+    booleanACodeType.push("java script");
+  }
+  if (req.body.cssCode == "true") {
+    booleanACodeType.push("css");
+  }
+  if (req.body.keyword != null) {
+    booleanACodeType.push(req.body.keyword);
+  }
+  if (booleanACodeType == null) {
+    booleanACodeType.push(" ");
+  }
 
   //check if user logged in
   if (req.session.userId != null) {
@@ -599,58 +660,77 @@ app.post('/addAlbums', function(req, res, next) {
     return res.redirect('/login');
   }
 });
-//_______________________________________________________________________________routes update albums
-// send addalbums file to this url
-app.get('/updateAlbum', function(req, res, next) {
-  var visability = visibleBtnHeader(req, res);
-  return res.render("updateAlbum", {
-    btnVisability: visability[0],
-    btnVisabilityOut: visability[1],
-    btnVisabilityProfile: visability[2]
-  });
 
-});
 //_______________________________________________________________________________update albums
+//routes from form in myalbums.ejs after click on editButton
 // send addalbums file to this url
 app.post('/updateAlbum', function(req, res, next) {
   var visability = visibleBtnHeader(req, res);
 
-  // read code type
-  var booleanACodeType;
-  if (req.body.htmlCode == "true") {
-    booleanACodeType = "html";
-
-  } else if (req.body.javascriptCode == "true") {
-    booleanACodeType = "java script";
-
-  } else if (req.body.cssCode == "true") {
-    booleanACodeType = "css";
-  } else {
-    booleanACodeType = req.body.keyword;
-  }
 
 
-console.log(req.body.editButton);
-
-console.log(req.body.updateTitle);
-
-console.log(req.session.userName);
-
-  //update
-  if (req.body.updateTitle != null) {
-    Albums.findOneAndUpdate({ ownerName: req.session.userName, _id: req.body.editButton}, { title: req.body.updateTitle },
-
-      (function(err)
-
-       {if (err) { return next(err); }
-        else { console.log(req.body.editButton);
-          res.redirect("/myalbums"); //redirect to albums function in app.js
-
-          //  editAlbumMsg: "updated successfully", //var in my albums
+  console.log(req.body.editButton);
+  console.log(req.session.userName);
+  var checkedType = [];
+  var keywordType=[];
+  Albums.findOne({
+      ownerName: req.session.userName,
+      _id: req.body.editButton
+    },
+    (function(err, album) {
+      if (err) {
+        return next(err);
+      } else {
+          console.log(album.codeType);
+        if (album.codeType.includes("html")) {
+          checkedType[0] = "checked";
+          album.codeType.splice("html", 1);
+        } else {
+          checkedType[0] = " ";
         }
+        if (album.codeType.includes("java script")) {
+          checkedType[1] = "checked";
+          album.codeType.splice("java script", 1);
+        } else {
+          checkedType[1] = " ";
+        }
+        if (album.codeType.includes("css")) {
+          checkedType[2] = "checked";
+          album.codeType.splice("css", 1);
+        } else {
+          checkedType[2] = " ";
+        }
+        if (album.codeType != null) {
+          keywordType = album.codeType;
+
+        }
+        if (keywordType == null) {
+          keywordType = " ";
+        }
+
+        return res.render("updateAlbum", {
+          btnVisability: visability[0],
+          btnVisabilityOut: visability[1],
+          btnVisabilityProfile: visability[2],
+          updateTitleVar: album.title,
+          updateCodeVar: album.code,
+          updateCostVar: album.cost,
+          updateDecVar: album.description,
+          idUpdate: album._id,
+          htmlChecked: checkedType[0],
+          jsChecked: checkedType[1],
+          cssChecked: checkedType[2],
+          keyword: keywordType
+        });
       }
-    )
-  );}
+      /*
+updateTitleVar = album.title;
+updateCodeVar = album.code;
+updateCostVar = album.cost;
+updateDecVar = album.description;
+idUpdate = album._id;*/
+      //codeType;
+    }));
 
   /*
   ,
