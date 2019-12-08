@@ -11,6 +11,7 @@ const app = express();
 //This package required for user session
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
+
 //const alert = require("alert-node");   :((
 // To tell the server to check js files in the views folder
 app.set('view engine', 'ejs');
@@ -476,12 +477,51 @@ app.get('/albums', function(req, res, next) {
       btnVisabilityOut: visability[1],
       btnVisabilityAdd: addalbumbutton[0],
       btnVisabilityMy: addalbumbutton[1],
-      newAlbums: foundAlbums
+      newAlbums: foundAlbums,
     });
 
   });
 
 });
+
+//_______________________________________________________________________________routes albums
+// send albums file to this url & display albums
+
+// send albums data to this url
+app.post('/viewAlbum', function(req, res, next) {
+  var visability = visibleBtnHeader(req, res);
+  var addalbumbutton = visibleBtnAlbum(req, res);
+
+  console.log(req.body.viewBtn);
+  var keywordType = [];
+  Albums.findById(req.body.viewBtn)
+    .exec(function(err, album) {
+      if (err) {
+        console.log("Error We are here");
+        return next(err);
+      } else {
+        console.log("We are here");
+        if (album.codeType != null) {
+          keywordType = album.codeType;
+
+        }
+        if (keywordType == null) {
+          keywordType = " ";
+        }
+        return res.render("viewAlbum", {
+          btnVisability: visability[0],
+          btnVisabilityOut: visability[1],
+          updateTitleVar: album.title,
+          updateCodeVar: album.code,
+          updateDecVar: album.description,
+          keyword: keywordType
+        });
+
+      }
+
+    });
+});
+
 
 //_______________________________________________________________________________routes my albums
 // send myalbums file to this url & display my albums
