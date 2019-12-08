@@ -50,7 +50,7 @@
           <% newAlbums.forEach(function(album){ %>
           <div class="col-md-4">
             <div class="card mb-4 shadow-sm">
-              <form class="" action="/updateAlbum" method="post" onload="checkCode();">
+              <form class="" method="post" onload="checkCode();">
 
                 <b class="card-text"> عنوان الكود : <%= album.title %> </b>
 
@@ -64,8 +64,8 @@
                   <p class="card-text" id="codeType"> نوع الكود: <%= album.codeType %></p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                      <button type="submit" class="btn Abtn btn-sm btn-outline-secondary" name="editButton" value="<%= album._id %>" > تعديل </button>
-                      <button type="submit" class="btn  Abtn btn-sm btn-outline-secondary"  name="editButton" value="<%= album._id %>" > حذف  </button>
+                      <button type="submit" class="btn Abtn btn-sm btn-outline-secondary" formaction="/updateAlbum" name="editButton" value="<%= album._id %>" > تعديل </button>
+                      <button type="submit" class="btn  Abtn btn-sm btn-outline-secondary" formaction="/deleteAlbum" name="editButton" value="<%= album._id %>" > حذف  </button>
                     </div>
                     <small class="text-muted"> الناشر : <%= album.ownerName %> </small> <!-- code owner -->
                   </div>
