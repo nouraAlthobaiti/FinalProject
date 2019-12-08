@@ -727,7 +727,14 @@ app.get('/rules', function(req, res, next) {
   res.sendFile(__dirname + "/rules.html");
 });
 
-
+//_______________________________________________________________________________routes payment
+app.get('/payment', function(req, res, next) {
+  var visability = visibleBtnHeader(req, res);
+  res.render("payment", {
+    btnVisability: visability[0],
+    btnVisabilityOut: visability[1],
+  });
+});
 //_______________________________________________________________________________server port
 
 //server port

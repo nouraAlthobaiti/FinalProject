@@ -110,7 +110,11 @@ a:link {
   font-style: oblique;
   line-height: 3;
 }
-
+.pay
+{
+  margin-top: 55px;
+  margin-bottom: 55px;
+}
 /*  inline block */
 .ib {
   display: inline-block;
