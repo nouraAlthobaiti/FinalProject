@@ -152,6 +152,12 @@ const AlbumsSchema = {
     required: false
   }
 };
+/* user (ms) --> 0    -------   cost --> 0 sr
+
+user (ms) --> 250  -------   cost --> 0 sr  to  50 sr
+
+user (ms) --> 500  -------   cost --> every thing
+ */
 
 //_____________________________________________________________________________album collection
 
@@ -171,7 +177,7 @@ const album2 = new Albums({
   ownerName: "admin_wafa'a",
   title: "Second Code",
   code: "<h2>Hi</h2>",
-  cost: 250,
+  cost: 100,
   description: "Second code",
   codeType: "css"
 });
@@ -180,7 +186,7 @@ const album3 = new Albums({
   ownerName: "admin_nora",
   title: "Third Code",
   code: "<h3>Hi</h3>",
-  cost: 500,
+  cost: 50,
   description: "Third code",
   codeType: "js"
 });
@@ -529,7 +535,7 @@ app.get('/myalbums', function(req, res, next) {
         btnVisabilityMy: addalbumbutton[1],
         newAlbums: foundAlbums
       });
-      
+
     } else {
       //To render views/list.ejs and send the markers values
       res.render("myalbums", {
@@ -573,7 +579,7 @@ app.post('/addAlbums', function(req, res, next) {
       ownerName: req.session.userName,
       title: req.body.title,
       code: req.body.code,
-      cost: Number(req.body.costType, 10), // string in number
+      cost: Number(req.body.cost, 10), // string in number
       //  cost: req.body.costType,
       description: req.body.description,
       codeType: booleanACodeType
@@ -597,6 +603,20 @@ app.post('/addAlbums', function(req, res, next) {
     return res.redirect('/login');
   }
 });
+//_______________________________________________________________________________update albums
+// send addalbums file to this url
+app.get('/updateAlbum', function(req, res, next) {
+  var visability = visibleBtnHeader(req, res);
+  return res.render("updateAlbum", {
+    noAlbumMsg: "",
+    btnVisability: visability[0],
+    btnVisabilityOut: visability[1],
+    btnVisabilityProfile: visability[2]
+  });
+
+});
+
+
 //_______________________________________________________________________________userManual
 app.post('/userManual', function(req, res, next) {
   res.senf("successfully");

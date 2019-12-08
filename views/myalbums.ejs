@@ -23,8 +23,8 @@
         <h1 class="jumbotron-heading">مكتبة كودي </h1>
         <p class="lead text-muted"> إليك مجموعة من الأدوات و الأكواد التي تجعل تصميمك أكثر جاذبية وَ مرونة ، بإمكانك شراء أيًّا منها ، كما يمكنك عرض أي محتوى يفيد مطوري المواقع للبيع </p>
         <p>
-          <a href="/myAlbums" class="Dbtn btn-primary my-2" style="display:">اكوادك هنا</a>
-          <a href="/membership" class="Dbtn btn-secondary my-2">حدث عضويتك</a>
+          <a href="/membership" class="Dbtn btn-primary my-2"> حدث عضويتك </a>
+          <a href="/albums" class="Dbtn btn-secondary my-2">عودة الى الالبومات </a>
 
           <!-- enable add form -->
           <!--  <a href="/addnewAlbumss" class="Dbtn btn-primary my-2" onclick="displayForm()" id="checkToAdd">اضف كودك</a>  -->
@@ -35,7 +35,7 @@
     </section>
 
 
-    <h4> اهلا <%= album.ownerName %> تجد جميع اكوادك هنا </h4>
+    <h4> اهلا  تجد جميع اكوادك هنا </h4>
     <div class="album py-5 bg-light">
       <div class="container">
         <!-- to display albums as rows -->
@@ -60,8 +60,8 @@
                   <p class="card-text" id="codeType"> نوع الكود: <%= album.codeType %></p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                      <button type="button" class="btn Abtn btn-sm btn-outline-secondary"> معاينة 👁 </button>
-                      <button type="button" class="btn  Abtn btn-sm btn-outline-secondary"> احصل عليه ب <%= album.cost %> $ </button>
+                      <button type="button" class="btn Abtn btn-sm btn-outline-secondary" onclick="location.href='/updateAlbum';" > تعديل </button>
+                      <button type="button" class="btn  Abtn btn-sm btn-outline-secondary"> حذف  </button>
                     </div>
                     <small class="text-muted"> الناشر : <%= album.ownerName %> </small> <!-- code owner -->
                   </div>
