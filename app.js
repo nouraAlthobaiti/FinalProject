@@ -632,7 +632,7 @@ app.post('/updateAlbum', function(req, res, next) {
 
   //update
   if (req.body.updateTitle != null) {
-    Albums.findOneAndUpdate({ ownerName: req.session.userName, _id:req.params.id}, { title: req.body.title },
+    Albums.findOneAndUpdate({ ownerName: req.session.userName, _id: updateButton}, { title: req.body.updateTitle },
 
       (function(err)
 
