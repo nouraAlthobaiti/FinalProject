@@ -562,7 +562,9 @@ margin-right: 400px;
 }
 .Pbtn
 {background-color: #3A484F;
-border:0px;}
+border:0px;
+}
   .Pbtn:hover
   {
-    background: #88b2ad;}
+    background: #88b2ad;
+    border-radius:16px;}

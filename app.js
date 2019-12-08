@@ -669,10 +669,7 @@ app.get('/rules', function(req, res, next) {
   res.sendFile(__dirname + "/rules.html");
 });
 
-//_______________________________________________________________________________userManual
-app.post('/userManual', function(req, res, next) {
-  res.senf("successfully");
-});
+
 //_______________________________________________________________________________server port
 
 //server port
