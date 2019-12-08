@@ -43,35 +43,39 @@
 
 
           <!-- add new codes  -->
-          <form class="" action="/addAlbums" method="post" style="align:center;" <!--style="display:none;" id="add" -->>
+          <form class="" action="/addAlbums" method="post" style="align:center;">
 
-            <label for="checkType"> اختر نوع الكود </label> <br>
+            </form> <!--style="display:none;" id="add" -->
+
+            <label for="checkType"> <u> اختر نوع الكود</u> </label> <br>
             <input type="checkbox" name="htmlCode" value="true"> HTML <br>
 
             <input type="checkbox" name="javascriptCode" value="true"> JAVA SCRIPT <br>
 
             <input type="checkbox" name="cssCode" value="true"> CSS <br> <br>
 
-            <label for="keyword">نوع اخر؟</label> <br>
-            <input type="text" name="keyword" value="" placeholder="كلمات دلالية" /> <br>
+            <label for="keyword"><u>نوع اخر؟</u></label> <br>
+            <input type="text" name="keyword" value="" placeholder="كلمات دلالية"> <br>
 
             <hr class="hr-line">
 
-            <label for="title"> ادخل عنوان الكود </label> <br>
-            <input type="text" name="title" value="" placeholder=" ادخل عنوان الكود" /> <br>
+            <label for="title"> <u>ادخل عنوان الكود</u></label> <br>
+            <input type="text" name="title" value="" placeholder=" ادخل عنوان الكود"> <br>
 
-            <label for="code"> ادخل كودك هنا </label> <br>
+            <label for="code"><u> ادخل كودك هنا </u> </label> <br>
             <textarea name="code" rows="8" cols="80" placeholder="ادخل كودك هنا"></textarea> <br>
+            <label for="description"><u>أدخل وصف للكود</u></label> <br>
+            <textarea name="description" rows="5" cols="80" placeholder="ادخل وصف للكود"></textarea> <br>
 
-            <label for="description">ادخل وصف للكود</label> <br>
+            <label for="description"> <u> ادخل وصف للكو د </u>/label> <br>
             <textarea name="description" rows="8" cols="80" placeholder="ادخل وصف للكود"></textarea> <br>
 
-            <label for="costType">اضف سعر مناسب للكود </label> <br>
+            <label for="costType"> <u> اضف سعر مناسب للكود </u> </label> <br>
             <input type="text" name="cost" value=""  placeholder=" سعر الكود" /> <br>
 
 
 
-            <button type="submit" name="button">اضافة</button>
+            <button type="submit" name="button" class="Dbtn">اضافة</button>
 
 
           </form>

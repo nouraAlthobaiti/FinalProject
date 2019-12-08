@@ -306,6 +306,7 @@ app.get('/signup', function(req, res, next) {
 //_______________________________________________________________________________routes userManual
 
 app.get('/userManual', function(req, res, next) {
+  var visability = visibleBtnHeader(req, res);
   res.sendFile(__dirname + "/manual.html");
 });
 app.get('/rules', function(req, res, next) {
