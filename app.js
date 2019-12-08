@@ -248,19 +248,7 @@ app.get('/', function(req, res, next) {
 
 });
 
-//_______________________________________________________________________________routes add albums
 
-// send addalbums file to this url
-app.get('/addalbums', function(req, res, next) {
-  var visability = visibleBtnHeader(req, res);
-  return res.render("addalbums", {
-    noAlbumMsg: "",
-    btnVisability: visability[0],
-    btnVisabilityOut: visability[1],
-    btnVisabilityProfile: visability[2]
-  });
-
-});
 
 //_______________________________________________________________________________routes sign in
 // send login file to this url
@@ -277,41 +265,7 @@ app.get('/login', function(req, res, next) {
 
   //res.sendFile(__dirname + '/login.html');
 });
-//_______________________________________________________________________________routes login->membership
 
-// send membership file to this url
-app.get('/membership', function(req, res, next) {
-  var visability = visibleBtnHeader(req, res);
-  return res.render("membership", {
-    btnVisability: visability[0],
-    btnVisabilityOut: visability[1],
-    btnVisabilityProfile: visability[2]
-  });
-});
-
-//_______________________________________________________________________________routes signup->membership
-
-// send membership file to this url
-app.get('/signup', function(req, res, next) {
-  var visability = visibleBtnHeader(req, res);
-  return res.render("signup", {
-    repeatedAccMsg: '',
-    btnVisability: visability[0],
-    btnVisabilityOut: visability[1],
-    btnVisabilityProfile: visability[2]
-  });
-
-  //res.sendFile(__dirname + '/signup.html');
-});
-//_______________________________________________________________________________routes userManual
-
-app.get('/userManual', function(req, res, next) {
-  var visability = visibleBtnHeader(req, res);
-  res.sendFile(__dirname + "/manual.html");
-});
-app.get('/rules', function(req, res, next) {
-  res.sendFile(__dirname + "/rules.html");
-});
 //_______________________________________________________________________________sign in
 app.post('/login', function(req, res, next) {
 
@@ -349,6 +303,21 @@ app.post('/login', function(req, res, next) {
 //window.alert('message');
 //alertMessage('message');
 //res.send(alert(err));
+
+//_______________________________________________________________________________routes signup->membership
+
+// send membership file to this url
+app.get('/signup', function(req, res, next) {
+  var visability = visibleBtnHeader(req, res);
+  return res.render("signup", {
+    repeatedAccMsg: '',
+    btnVisability: visability[0],
+    btnVisabilityOut: visability[1],
+    btnVisabilityProfile: visability[2]
+  });
+
+  //res.sendFile(__dirname + '/signup.html');
+});
 
 //_______________________________________________________________________________sign up
 app.post('/signup', function(req, res, next) {
@@ -400,6 +369,22 @@ app.post('/signup', function(req, res, next) {
   //} //end if
 
 });
+
+//_______________________________________________________________________________loguot
+
+// GET for logout
+app.get('/logout', function(req, res, next) {
+  if (req.session) {
+    // delete session object
+    req.session.destroy(function(err) {
+      if (err) {
+        return next(err);
+      } else {
+        return res.redirect('/');
+      }
+    });
+  }
+});
 //_______________________________________________________________________________profile routes
 
 
@@ -430,23 +415,19 @@ app.get('/profile', function(req, res, next) {
     });
 });
 
-//_______________________________________________________________________________loguot
 
-// GET for logout
-app.get('/logout', function(req, res, next) {
-  if (req.session) {
-    // delete session object
-    req.session.destroy(function(err) {
-      if (err) {
-        return next(err);
-      } else {
-        return res.redirect('/');
-      }
-    });
-  }
+
+//_______________________________________________________________________________routes login->membership
+
+// send membership file to this url
+app.get('/membership', function(req, res, next) {
+  var visability = visibleBtnHeader(req, res);
+  return res.render("membership", {
+    btnVisability: visability[0],
+    btnVisabilityOut: visability[1],
+    btnVisabilityProfile: visability[2]
+  });
 });
-
-
 //_______________________________________________________________________________membershipCheck
 
 // GET for membershipCheck
@@ -466,7 +447,7 @@ app.post('/membershipCheck', function(req, res, next) {
         return next(err);
 
       } else {
-        return res.redirect('/');
+        return res.redirect('/profile');
       }
     }));
   } else {
@@ -540,6 +521,7 @@ app.get('/myalbums', function(req, res, next) {
     } else {
       //To render views/list.ejs and send the markers values
       res.render("myalbums", {
+        editAlbumMsg: "",
         btnVisability: visability[0],
         btnVisabilityOut: visability[1],
         btnVisabilityProfile: visability[2],
@@ -548,6 +530,19 @@ app.get('/myalbums', function(req, res, next) {
         newAlbums: foundAlbums
       });
     }
+  });
+
+});
+//_______________________________________________________________________________routes add albums
+
+// send addalbums file to this url
+app.get('/addalbums', function(req, res, next) {
+  var visability = visibleBtnHeader(req, res);
+  return res.render("addalbums", {
+    noAlbumMsg: "",
+    btnVisability: visability[0],
+    btnVisabilityOut: visability[1],
+    btnVisabilityProfile: visability[2]
   });
 
 });
@@ -604,19 +599,42 @@ app.post('/addAlbums', function(req, res, next) {
     return res.redirect('/login');
   }
 });
-//_______________________________________________________________________________update albums
+//_______________________________________________________________________________routes update albums
 // send addalbums file to this url
 app.get('/updateAlbum', function(req, res, next) {
   var visability = visibleBtnHeader(req, res);
   return res.render("updateAlbum", {
-    noAlbumMsg: "",
     btnVisability: visability[0],
     btnVisabilityOut: visability[1],
     btnVisabilityProfile: visability[2]
   });
 
 });
+//_______________________________________________________________________________update albums
+// send addalbums file to this url
+app.post('/updateAlbum', function(req, res, next) {
+  var visability = visibleBtnHeader(req, res);
 
+
+
+
+  return res.render("myalbums", {
+    editAlbumMsg: "updated successfully",  //var in my albums
+    btnVisability: visability[0],
+    btnVisabilityOut: visability[1],
+    btnVisabilityProfile: visability[2]
+  });
+
+});
+//_______________________________________________________________________________routes userManual
+
+app.get('/userManual', function(req, res, next) {
+  var visability = visibleBtnHeader(req, res);
+  res.sendFile(__dirname + "/manual.html");
+});
+app.get('/rules', function(req, res, next) {
+  res.sendFile(__dirname + "/rules.html");
+});
 
 //_______________________________________________________________________________userManual
 app.post('/userManual', function(req, res, next) {
