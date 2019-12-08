@@ -615,15 +615,48 @@ app.get('/updateAlbum', function(req, res, next) {
 app.post('/updateAlbum', function(req, res, next) {
   var visability = visibleBtnHeader(req, res);
 
+  // read code type
+  var booleanACodeType;
+  if (req.body.htmlCode == "true") {
+    booleanACodeType = "html";
+
+  } else if (req.body.javascriptCode == "true") {
+    booleanACodeType = "java script";
+
+  } else if (req.body.cssCode == "true") {
+    booleanACodeType = "css";
+  } else {
+    booleanACodeType = req.body.keyword;
+  }
 
 
+  //update
+  if (req.body.title != null) {
+    Albums.findOneAndUpdate({ ownerName: req.session.userName, _id:req.params.id}, { title: req.body.title },
 
-  return res.render("myalbums", {
-    editAlbumMsg: "updated successfully",  //var in my albums
-    btnVisability: visability[0],
-    btnVisabilityOut: visability[1],
-    btnVisabilityProfile: visability[2]
-  });
+      (function(err)
+
+       {if (err) { return next(err); }
+        else { console.log(req.body.title);
+          res.redirect("/myalbums"); //redirect to albums function in app.js
+
+          //  editAlbumMsg: "updated successfully", //var in my albums
+        }
+      }
+    )
+  );}
+
+  /*
+  ,
+  title: req.body.title,
+  code: req.body.code,
+  cost: Number(req.body.cost, 10), // string in number
+  //  cost: req.body.costType,
+  description: req.body.description,
+  codeType: booleanACodeType
+  */
+
+
 
 });
 //_______________________________________________________________________________routes userManual
