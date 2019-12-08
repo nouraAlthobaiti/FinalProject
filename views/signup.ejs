@@ -1,21 +1,21 @@
 <%- include("header") -%>
 <center>
-<div class="sign">
-  <form class="form-signin" id="login" action="/signup" method="post">
+  <div class="sign">
+    <form class="form-signin" id="login" action="/signup" method="post" onsubmit="validateMyForm();">
 
-    <img class="mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
+      <img class="mb-4" src="/docs/4.3/assets/brand/bootstrap-solid.svg" alt="" width="72" height="72">
 
-    <h1 class="h3 mb-3 font-weight-normal">تسجيل جديد </h1>
+      <h1 class="h3 mb-3 font-weight-normal">تسجيل جديد </h1>
 
-    <label for="username" class="sr-only">اسم المستخدم </label>
-    <input type="text" id="inputUserName" name="username" class="form-control" placeholder="اسم المستخدم" required autofocus>
+      <label for="username" class="sr-only">اسم المستخدم </label>
+      <input type="text" id="inputUserName" name="username" class="form-control" placeholder="اسم المستخدم" required autofocus>
 
-    <label for="inputEmail" class="sr-only">البريد الالكتروني </label>
-    <input type="email" id="inputEmail" name="email" class="form-control" placeholder="البريد الالكتروني" required autofocus>
+      <label for="inputEmail" class="sr-only">البريد الالكتروني </label>
+      <input type="email" id="inputEmail" name="email" class="form-control" placeholder="البريد الالكتروني" required autofocus>
 
 
-    <label for="inputPassword" class="sr-only">كلمة المرور </label>
-    <input type="password" id="inputPassword" name="password" class="form-control" placeholder="كلمة المرور" required>
+      <label for="inputPassword" class="sr-only">كلمة المرور </label>
+      <input type="password" id="inputPassword" name="password" class="form-control" placeholder="كلمة المرور" required>
 
     <label for="inputPassword" class="sr-only">تأكيد كلمة المرور </label>
     <input type="password" id="confinputPassword" name="passwordConf" class="form-control" placeholder="تأكيد كلمة المرور " required>
@@ -23,11 +23,11 @@
     <div>
       <p class="mt-5 mb-3 text-muted">بإنشائك الحساب أنت توافق على جميع <a href="#" onClick="MyWindow=window.open('/rules','MyWindow','width=600,height=300'); return false;">ضوابط الموقع</a>
 
-    </div>
-</div>
-<button class="Dbtn" type="submit">تسجيل</button>
-<p class="mt-5 mb-3 text-muted">لديك حساب بالفعل ؟ <a href="/login"> تسجيل الدخول </a> </p>
-</form>
+      </div>
+  </div>
+  <button class="Dbtn" type="submit">تسجيل</button>
+  <p class="mt-5 mb-3 text-muted">لديك حساب بالفعل ؟ <a href="/login"> تسجيل الدخول </a> </p>
+  </form>
 </center>
 
 <!--  not working! instead check in app.js  -->

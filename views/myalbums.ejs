@@ -23,7 +23,7 @@
         <h1 class="jumbotron-heading">مكتبة كودي </h1>
         <p class="lead text-muted"> إليك مجموعة من الأدوات و الأكواد التي تجعل تصميمك أكثر جاذبية وَ مرونة ، بإمكانك شراء أيًّا منها ، كما يمكنك عرض أي محتوى يفيد مطوري المواقع للبيع </p>
         <p>
-          <a href="/myAlbums" class="Dbtn btn-primary my-2" style="display:<%= btnVisabilityMy %>">اكوادك هنا</a>
+          <a href="/myAlbums" class="Dbtn btn-primary my-2" style="display:">اكوادك هنا</a>
           <a href="/membership" class="Dbtn btn-secondary my-2">حدث عضويتك</a>
 
           <!-- enable add form -->
@@ -35,7 +35,7 @@
     </section>
 
 
-    <h4> تجد جميع الاكواد هنا </h4>
+    <h4> اهلا <%= album.ownerName %> تجد جميع اكوادك هنا </h4>
     <div class="album py-5 bg-light">
       <div class="container">
         <!-- to display albums as rows -->
@@ -46,7 +46,7 @@
           <% newAlbums.forEach(function(album){ %>
           <div class="col-md-4">
             <div class="card mb-4 shadow-sm">
-              <form class="" action="/albums" method="post" onload="checkCode();">
+              <form class="" action="/myalbums" method="post" onload="checkCode();">
 
                 <b class="card-text"> عنوان الكود : <%= album.title %> </b>
 
