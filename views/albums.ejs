@@ -46,7 +46,7 @@
           <% newAlbums.forEach(function(album){ %>
           <div class="col-md-4">
             <div class="card mb-4 shadow-sm">
-              <form class="" action="/albums" method="post" onload="checkCode();">
+              <form id="viewForm" class="" method="post" onload="checkCode();">
 
                 <b class="card-text"> عنوان الكود : <%= album.title %> </b>
 
@@ -60,7 +60,12 @@
                   <p class="card-text" id="codeType"> نوع الكود: <%= album.codeType %></p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
+<<<<<<< HEAD
                       <button type="button" class="btn Abtn btn-sm btn-outline-secondary" value="<%= album._id %> "> <%=access%> </button> <!--معاينة 👁-->
+=======
+                      <button type="submit" name="viewBtn" class="btn Abtn btn-sm btn-outline-secondary" formaction="/viewAlbum" value="<%= album._id %>" > 👁 </button>
+                      <button type="submit" name="viewBtn" class="btn  Abtn btn-sm btn-outline-secondary" formaction="/albums" value="<%= album._id %>" > <%= album.cost %> ريال </button>
+>>>>>>> 18bc79f05c236a25cd52a1630943576c85c41d15
                     </div>
                     <small class="text-muted"> الناشر : <%= album.ownerName %> </small> <!-- code owner -->
                   </div>
@@ -76,8 +81,6 @@
     </div>
   </main>
 </center>
-
-
 
 <%- include("footer") -%>
 
