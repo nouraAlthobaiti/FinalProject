@@ -11,6 +11,8 @@ const app = express();
 //This package required for user session
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
+//This package for Search
+var matchWords = require('word-regex');
 //const alert = require("alert-node");   :((
 // To tell the server to check js files in the views folder
 app.set('view engine', 'ejs');
@@ -204,7 +206,13 @@ const Owners = mongoose.model("Owners", OwnershipSchema);
 //_______________________________________________________________________________
 //_______________________________________________________________________________
 //_______________________________________________________________________________functions
-
+//function for matching
+function matching(req,res)
+{
+  if(req.body.search)
+  {
+   matchWords('<%keywordType%>');
+}}
 //function to control buttons appearance
 function visibleBtnHeader(req, res) {
   var N = "none";
