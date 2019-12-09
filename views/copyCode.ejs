@@ -1,0 +1,22 @@
+<%- include("header") -%>
+<section class="jumbotron text-center"  id="ViewSection" style="align:center;">
+
+  <label for="checkType"><u>  نوع الكود   </u></label><br>
+  <label type="text" name="keyword"> <%=codeTypevar%> nnn</label> <br>
+
+  <hr class="hr-line">
+
+  <label for="title"><u>عنوان الكود</u></label> <br>
+  <label type="text" name="updateTitle"> <%= titleVar %>nn </label><br>
+
+  <label for="code"><u>الكود</u></label> <br>
+  <code><p name="code" rows="8" cols="80" readonly> <%= codeVar %> mm</p></code><br>
+
+  <label for="description"><u>وصف الكود</u></label> <br>
+  <p name="updateDescription" rows="5" cols="80" readonly copy="disable"> nn<%= decVar %> nn</p><br>
+
+  <a href="/albums"><button type="button" name="albumIdButton" class="Dbtn" value=" "> عوده </button></a>
+
+
+</section>
+<%- include("footer") -%>
