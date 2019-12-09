@@ -484,12 +484,54 @@ app.get('/albums', function(req, res, next) {
       btnVisabilityOut: visability[1],
       btnVisabilityAdd: addalbumbutton[0],
       btnVisabilityMy: addalbumbutton[1],
-      newAlbums: foundAlbums
+      newAlbums: foundAlbums,
+      btnaccess:"none",
+      buyId:" "
     });
 
   });
 
 });
+
+//_______________________________________________________________________________routes albums
+// send albums file to this url & display albums
+
+// send albums data to this url
+app.post('/viewAlbum', function(req, res, next) {
+  var visability = visibleBtnHeader(req, res);
+  var addalbumbutton = visibleBtnAlbum(req, res);
+
+  console.log(req.body.albumIdButton);
+  var keywordType = [];
+  Albums.findById(req.body.albumIdButton)
+    .exec(function(err, album) {
+      if (err) {
+        console.log("Error We are here");
+        return next(err);
+      } else {
+        console.log("We are here");
+        if (album.codeType != null) {
+          keywordType = album.codeType;
+
+        }
+        if (keywordType == null) {
+          keywordType = " ";
+        }
+        return res.render("viewAlbum", {
+          btnVisability: visability[0],
+          btnVisabilityOut: visability[1],
+          updateTitleVar: album.title,
+          updateCodeVar: album.code,
+          updateDecVar: album.description,
+          keyword: keywordType,
+          albumid:album._id
+        });
+
+      }
+
+    });
+});
+
 
 //_______________________________________________________________________________routes my albums
 // send myalbums file to this url & display my albums
@@ -735,14 +777,159 @@ app.get('/rules', function(req, res, next) {
   res.sendFile(__dirname + "/rules.html");
 });
 
-//_______________________________________________________________________________routes payment
-app.get('/payment', function(req, res, next) {
+
+//_______________________________________________________________________________eye on album
+ // read and wright
+app.post('/access', function(req, res, next) {
   var visability = visibleBtnHeader(req, res);
-  res.render("payment", {
-    btnVisability: visability[0],
-    btnVisabilityOut: visability[1],
-  });
+  var addalbumbutton = visibleBtnAlbum(req, res);
+
+var membershipvar;
+var keywordType=[];
+
+  //user membership
+      User.findOne({
+      _id:req.session.userId },
+      {membership:1} , function(err,ms){ if(err) {return next(err);} else{
+        membershipvar=ms.membership;
+        console.log(ms);}});
+
+      console.log(membershipvar);
+      //code cost
+      Albums.findById(req.body.viewBtn)
+    .exec(function(err, album) {
+      if (err) {
+        console.log("Error We are here");
+        return next(err);
+      } else {
+        console.log("We are here");
+        if (album.codeType != null) {
+          keywordType = album.codeType;
+
+        }
+        if (keywordType == null) {
+          keywordType = " ";
+        }
+
+        //if free
+        if(album.cost == 0){
+          return res.render("viewAlbum", {
+            btnVisability: visability[0],
+            btnVisabilityOut: visability[1],
+            updateTitleVar: album.title,
+            updateCodeVar: album.code,
+            updateDecVar: album.description,
+            keyword: keywordType,
+            albumid:album._id
+          });
+
+        }
+
+
+        //if not free   //if logged in
+        else if(req.session.userId)
+
+          {console.log("//if logged in");
+
+            if((membershipvar == 0) && (album.cost != 0)){
+              //all albums
+              Albums.find({}, function(err, foundAlbums) {
+                if(err){return next(err);}
+                else{
+                  // display:inline btnaccess:inline
+                  res.render("albums", {
+                    btnVisability: visability[0],
+                    btnVisabilityOut: visability[1],
+                    btnVisabilityAdd: addalbumbutton[0],
+                    btnVisabilityMy: addalbumbutton[1],
+                    newAlbums: foundAlbums,
+                    btnaccess:"inline",
+                    buyId:req.body.viewBtn
+                  });
+
+                  console.log(foundAlbums);} });
+
+
+
+            }
+
+
+            //if ms = 250
+            if(membershipvar == 250)
+            { console.log("250");
+              //if in range
+              if(album.cost <= 50){
+                console.log("cost 50");
+                return res.render("viewAlbum", {
+                  btnVisability: visability[0],
+                  btnVisabilityOut: visability[1],
+                  updateTitleVar: album.title,
+                  updateCodeVar: album.code,
+                  updateDecVar: album.description,
+                  keyword: keywordType,
+                  albumid:album._id
+                });
+              }
+
+
+              //if not in range
+              else{
+                //all albums
+                Albums.find({}, function(err, foundAlbums) {
+                  if(err){return next(err);}
+                  else{
+                    // display:inline btnaccess:inline
+                    res.render("albums", {
+                      btnVisability: visability[0],
+                      btnVisabilityOut: visability[1],
+                      btnVisabilityAdd: addalbumbutton[0],
+                      btnVisabilityMy: addalbumbutton[1],
+                      newAlbums: foundAlbums,
+                      btnaccess:"inline",
+                      buyId:req.body.viewBtn
+                    });
+
+                    console.log(foundAlbums);} });
+
+
+
+              }
+
+            } //end if 250
+
+            //if 500
+
+            if(membershipvar == 500)
+            {
+                return res.render("viewAlbum", {
+                  btnVisability: visability[0],
+                  btnVisabilityOut: visability[1],
+                  updateTitleVar: album.title,
+                  updateCodeVar: album.code,
+                  updateDecVar: album.description,
+                  keyword: keywordType,
+                  albumid:album._id
+                });
+              }//end if 500
+
+
+            }
+
+            //if not logged in
+            else{
+              return res.redirect('/login');
+
+            }
+
+
+
+      }
+
+    });//end query
+
+
 });
+
 //_______________________________________________________________________________server port
 
 //server port
