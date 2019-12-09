@@ -11,7 +11,8 @@ const app = express();
 //This package required for user session
 const session = require('express-session');
 const MongoStore = require('connect-mongo')(session);
-
+//This package for Search
+var matchWords = require('word-regex');
 //const alert = require("alert-node");   :((
 // To tell the server to check js files in the views folder
 app.set('view engine', 'ejs');
@@ -205,7 +206,13 @@ const Owners = mongoose.model("Owners", OwnershipSchema);
 //_______________________________________________________________________________
 //_______________________________________________________________________________
 //_______________________________________________________________________________functions
-
+//function for matching
+function matching(req,res)
+{
+  if(req.body.search)
+  {
+   matchWords('<%=keywordType=%>');
+}}
 //function to control buttons appearance
 function visibleBtnHeader(req, res) {
   var N = "none";
@@ -568,7 +575,7 @@ app.get('/myalbums', function(req, res, next) {
 //_______________________________________________________________________________myalbums
 
 app.post('/myalbums', function(req, res, next) {
-  //Here we will find the Update
+
   /*if(updateTitleVar == null || updateCodeVar == null || updateCostVar == null || updateDecVar== null)
   {
   "من فضلك! قم بتعبئة الخانات الفارغة"
@@ -703,7 +710,7 @@ app.post('/updateAlbum', function(req, res, next) {
   console.log(req.body.editButton);
   console.log(req.session.userName);
   var checkedType = [];
-  var keywordType = [];
+  var keywordType=[];
   Albums.findOne({
       ownerName: req.session.userName,
       _id: req.body.editButton
@@ -712,7 +719,7 @@ app.post('/updateAlbum', function(req, res, next) {
       if (err) {
         return next(err);
       } else {
-        console.log(album.codeType);
+          console.log(album.codeType);
         if (album.codeType.includes("html")) {
           checkedType[0] = "checked";
           album.codeType.splice("html", 1);
@@ -757,21 +764,6 @@ app.post('/updateAlbum', function(req, res, next) {
     }));
 
 });
-
-//_______________________________________________________________________________delete albums
-//routes from form in myalbums.ejs after click on editButton
-// send addalbums file to this url
-app.post('/deleteAlbum', function(req, res, next) {
-  Albums.findByIdAndRemove(req.body.editButton, function(err) {
-    if (!err) {
-      console.log("Successfully deleted checked item.");
-      res.redirect("/myalbums");
-    } else {
-      console.log("Successfully deleted checked item.");
-    }
-  });
-});
-
 //_______________________________________________________________________________routes userManual
 
 app.get('/userManual', function(req, res, next) {
