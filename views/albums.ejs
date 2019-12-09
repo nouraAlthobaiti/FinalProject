@@ -41,9 +41,9 @@
     <!-- msg -->
     <p style="display:<%= btnaccess %>" >لا يمكنك معاينةالكود</p>
     <a href="/membership">
-    <button type="button" name="accessButton1" class="btn Abtn btn-sm btn-outline-secondary" value=""  style="display:<%= btnaccess %>" > حدث عضويتك </button> </a>
+    <button type="button" name="accessButton1" class="btn Abtn btn-sm btn-outline-secondary" value="<%=buyId%>"  style="display:<%= btnaccess %>" > حدث عضويتك </button> </a>
 
-    <button type="submit" name="accessButton2" class="btn Abtn btn-sm btn-outline-secondary" value="<%=buyId%>" formaction="/access" style="display:<%= btnaccess %>" > الشراء </button>
+    <button type="submit" name="memberBtn" class="btn Abtn btn-sm btn-outline-secondary" value="<%= paymentAlbum %>" formaction="/payment" style="display:<%= btnaccess %>" > الشراء </button>
 
     <!-- end msg -->
 
