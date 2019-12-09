@@ -207,12 +207,11 @@ const Owners = mongoose.model("Owners", OwnershipSchema);
 //_______________________________________________________________________________
 //_______________________________________________________________________________functions
 //function for matching
-function matching(req,res)
-{
-  if(req.body.search)
-  {
-   matchWords('<%=keywordType=%>');
-}}
+function matching(req, res) {
+  if (req.body.search) {
+    matchWords('<%=keywordType=%>');
+  }
+}
 //function to control buttons appearance
 function visibleBtnHeader(req, res) {
   var N = "none";
@@ -447,7 +446,11 @@ app.post('/membershipCheck', function(req, res, next) {
         return next(err);
 
       } else {
-        return res.redirect('/profile');
+        if (membersh == "0") {
+          return res.redirect('/profile');
+        } else {
+          return res.redirect('/payment');
+        }
       }
     }));
   } else {
@@ -668,7 +671,7 @@ app.post('/updateAlbum', function(req, res, next) {
   console.log(req.body.editButton);
   console.log(req.session.userName);
   var checkedType = [];
-  var keywordType=[];
+  var keywordType = [];
   Albums.findOne({
       ownerName: req.session.userName,
       _id: req.body.editButton
@@ -677,7 +680,7 @@ app.post('/updateAlbum', function(req, res, next) {
       if (err) {
         return next(err);
       } else {
-          console.log(album.codeType);
+        console.log(album.codeType);
         if (album.codeType.includes("html")) {
           checkedType[0] = "checked";
           album.codeType.splice("html", 1);
@@ -738,10 +741,25 @@ app.get('/rules', function(req, res, next) {
 //_______________________________________________________________________________routes payment
 app.get('/payment', function(req, res, next) {
   var visability = visibleBtnHeader(req, res);
-  res.render("payment", {
-    btnVisability: visability[0],
-    btnVisabilityOut: visability[1],
-  });
+
+  User.findById(req.session.userId)
+    .exec(function(error, user) {
+      if (error) {
+        return next(error);
+      } else {
+        if (user === null) {
+          var err = new Error('Not authorized! Go back!');
+          err.status = 400;
+          return next(err);
+        } else {
+          return res.render("payment", {
+            totalAmount: user.membership,
+            btnVisability: visability[0],
+            btnVisabilityOut: visability[1],
+          }); //(/profile --> change url only) otherwise (render my ejs file)
+        }
+      }
+    });
 });
 //_______________________________________________________________________________server port
 
