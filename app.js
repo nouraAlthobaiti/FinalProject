@@ -431,6 +431,7 @@ app.get('/membership', function(req, res, next) {
 
 // GET for membershipCheck
 app.post('/membershipCheck', function(req, res, next) {
+    var visability = visibleBtnHeader(req, res);
   // Always the value attribute of elements will send in submit form (from client to server)
   // memberBtn is the name of buttons in pricinig.ejs
   // req.body.memberBtn is the sending value of button clicked for submitting
@@ -449,7 +450,12 @@ app.post('/membershipCheck', function(req, res, next) {
         if (membersh == "0") {
           return res.redirect('/profile');
         } else {
-          return res.redirect('/payment');
+          return res.render("payment", {
+            //  totalAmount: user.membership,
+            totalAmount: membersh,
+            btnVisability: visability[0],
+            btnVisabilityOut: visability[1],
+          }); //(/profile --> change url only) otherwise (render my ejs file)
         }
       }
     }));
@@ -482,17 +488,61 @@ app.get('/albums', function(req, res, next) {
       res.redirect("/albums"); //redirect to albums function in app.js
     }
     //To render views/list.ejs and send the markers values
+
     res.render("albums", {
       btnVisability: visability[0],
       btnVisabilityOut: visability[1],
       btnVisabilityAdd: addalbumbutton[0],
       btnVisabilityMy: addalbumbutton[1],
-      newAlbums: foundAlbums
+      newAlbums: foundAlbums,
+      btnaccess: "none",
+      buyId: " ",
+      paymentAlbum: " "
     });
 
   });
 
 });
+
+//_______________________________________________________________________________routes albums
+// send albums file to this url & display albums
+
+// send albums data to this url
+app.post('/viewAlbum', function(req, res, next) {
+  var visability = visibleBtnHeader(req, res);
+  var addalbumbutton = visibleBtnAlbum(req, res);
+
+  console.log(req.body.albumIdButton);
+  var keywordType = [];
+  Albums.findById(req.body.albumIdButton)
+    .exec(function(err, album) {
+      if (err) {
+        console.log("Error We are here");
+        return next(err);
+      } else {
+        console.log("We are here");
+        if (album.codeType != null) {
+          keywordType = album.codeType;
+
+        }
+        if (keywordType == null) {
+          keywordType = " ";
+        }
+        return res.render("viewAlbum", {
+          btnVisability: visability[0],
+          btnVisabilityOut: visability[1],
+          updateTitleVar: album.title,
+          updateCodeVar: album.code,
+          updateDecVar: album.description,
+          keyword: keywordType,
+          albumid: album._id
+        });
+
+      }
+
+    });
+});
+
 
 //_______________________________________________________________________________routes my albums
 // send myalbums file to this url & display my albums
@@ -738,29 +788,217 @@ app.get('/rules', function(req, res, next) {
   res.sendFile(__dirname + "/rules.html");
 });
 
-//_______________________________________________________________________________routes payment
-app.get('/payment', function(req, res, next) {
-  var visability = visibleBtnHeader(req, res);
 
-  User.findById(req.session.userId)
-    .exec(function(error, user) {
-      if (error) {
-        return next(error);
+//_______________________________________________________________________________eye on album
+// read and wright
+app.post('/access', function(req, res, next) {
+  var visability = visibleBtnHeader(req, res);
+  var addalbumbutton = visibleBtnAlbum(req, res);
+
+  var membershipvar;
+  var keywordType = [];
+
+  //user membership
+  User.findOne({
+    _id: req.session.userId
+  }, {
+    membership: 1
+  }, function(err, ms) {
+    if (err) {
+      return next(err);
+    } else {
+      membershipvar = ms.membership;
+      console.log(ms);
+    }
+  });
+
+  console.log(membershipvar);
+  //code cost
+  Albums.findById(req.body.viewBtn)
+    .exec(function(err, album) {
+      if (err) {
+        console.log("Error We are here");
+        return next(err);
       } else {
-        if (user === null) {
-          var err = new Error('Not authorized! Go back!');
-          err.status = 400;
-          return next(err);
-        } else {
-          return res.render("payment", {
-            totalAmount: user.membership,
+        var payment= album.cost;
+        console.log("We are here");
+        if (album.codeType != null) {
+          keywordType = album.codeType;
+
+        }
+        if (keywordType == null) {
+          keywordType = " ";
+        }
+
+        //if free
+        if (album.cost == 0) {
+          return res.render("viewAlbum", {
             btnVisability: visability[0],
             btnVisabilityOut: visability[1],
-          }); //(/profile --> change url only) otherwise (render my ejs file)
+            updateTitleVar: album.title,
+            updateCodeVar: album.code,
+            updateDecVar: album.description,
+            keyword: keywordType,
+            albumid: album._id
+          });
+
         }
+
+
+        //if not free   //if logged in
+        else if (req.session.userId)
+
+        {
+          console.log("//if logged in");
+
+          if ((membershipvar == 0) && (album.cost != 0)) {
+            //all albums
+            Albums.find({}, function(err, foundAlbums) {
+              if (err) {
+                return next(err);
+              } else {
+                console.log (req.body.viewBtn);
+                console.log (payment);
+                // display:inline btnaccess:inline
+                res.render("albums", {
+                  btnVisability: visability[0],
+                  btnVisabilityOut: visability[1],
+                  btnVisabilityAdd: addalbumbutton[0],
+                  btnVisabilityMy: addalbumbutton[1],
+                  newAlbums: foundAlbums,
+                  btnaccess: "inline",
+                  buyId: req.body.viewBtn,
+                  paymentAlbum:payment
+                });
+
+                console.log(foundAlbums);
+              }
+            });
+
+
+
+          }
+
+
+          //if ms = 250
+          if (membershipvar == 250) {
+            console.log("250");
+            //if in range
+            if (album.cost <= 50) {
+              console.log("cost 50");
+              return res.render("viewAlbum", {
+                btnVisability: visability[0],
+                btnVisabilityOut: visability[1],
+                updateTitleVar: album.title,
+                updateCodeVar: album.code,
+                updateDecVar: album.description,
+                keyword: keywordType,
+                albumid: album._id
+              });
+            }
+
+
+            //if not in range
+            else {
+              //all albums
+              Albums.find({}, function(err, foundAlbums) {
+                if (err) {
+                  return next(err);
+                } else {
+                  console.log (req.body.viewBtn);
+                  console.log (payment);
+                  // display:inline btnaccess:inline
+                  res.render("albums", {
+                    btnVisability: visability[0],
+                    btnVisabilityOut: visability[1],
+                    btnVisabilityAdd: addalbumbutton[0],
+                    btnVisabilityMy: addalbumbutton[1],
+                    newAlbums: foundAlbums,
+                    btnaccess: "inline",
+                    buyId: req.body.viewBtn,
+                    paymentAlbum: payment
+                  });
+
+                  console.log(foundAlbums);
+                }
+              });
+
+
+
+            }
+
+          } //end if 250
+
+          //if 500
+
+          if (membershipvar == 500) {
+            return res.render("viewAlbum", {
+              btnVisability: visability[0],
+              btnVisabilityOut: visability[1],
+              updateTitleVar: album.title,
+              updateCodeVar: album.code,
+              updateDecVar: album.description,
+              keyword: keywordType,
+              albumid: album._id
+            });
+          } //end if 500
+
+
+        }
+
+        //if not logged in
+        else {
+          return res.redirect('/login');
+
+        }
+
+
+
       }
-    });
+
+    }); //end query
+
+
 });
+
+app.get('/payment', function(req, res, next) {
+  var visability = visibleBtnHeader(req, res);
+  return res.render("payment", {
+    //  totalAmount: user.membership,
+    totalAmount: req.body.memberBtn,
+    btnVisability: visability[0],
+    btnVisabilityOut: visability[1],
+  }); //(/profile --> change url only) otherwise (render my ejs file)
+});
+
+app.post('/payment', function(req, res, next) {
+var visability = visibleBtnHeader(req, res);
+
+  if (req.session.userId != null) {
+    User.findById(req.session.userId)
+      .exec(function(error, user) {
+        if (error) {
+          return next(error);
+        } else {
+          if (user === null) {
+            var err = new Error('Not authorized! Go back!');
+            err.status = 400;
+            return next(err);
+          } else {
+            return res.render("payment", {
+              //  totalAmount: user.membership,
+              totalAmount: req.body.memberBtn,
+              btnVisability: visability[0],
+              btnVisabilityOut: visability[1],
+            }); //(/profile --> change url only) otherwise (render my ejs file)
+          }
+        }
+      });
+  } else {
+    return res.redirect('/login');
+  }
+});
+
 //_______________________________________________________________________________server port
 
 //server port

@@ -1,10 +1,10 @@
 <%- include("header") -%>
-<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+<!--<link href="//netdna.bootstrapcdn.com/bootstrap/3.0.3/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
 <!-- Bootstrap CSS <from website>-->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 <!--sign user-->
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+<!--<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
 
@@ -22,13 +22,15 @@
   <center>
 
     <div class="container">
-
       <div class="pay">
         <div class='row'>
+
+
           <div class='col-md-4'></div>
-          <div class='col-md-4'>
+          <div class='col-md-4' style="text-align:center">
             <script src='https://js.stripe.com/v2/' type='text/javascript'></script>
-            <form accept-charset="UTF-8" action="/" class="require-validation" data-cc-on-file="false" data-stripe-publishable-key="pk_bQQaTxnaZlzv4FnnuZ28LFHccVSaj" id="payment-form" method="post">
+            <center>
+          <!--<form accept-charset="UTF-8"> action="/profile" class="require-validation" data-cc-on-file="false" data-stripe-publishable-key="pk_bQQaTxnaZlzv4FnnuZ28LFHccVSaj" id="payment-form"  method="post">-->
               <div style="margin:0;padding:0;display:inline"><input name="utf8" type="hidden" value="✓" /><input name="_method" type="hidden" value="PUT" /><input name="authenticity_token" type="hidden"
                   value="qLZ9cScer7ZxqulsUWazw4x3cSEzv899SP/7ThPCOV8=" /></div>
               <div class='form-row'>
@@ -67,7 +69,7 @@
             </div>
             <div class='form-row'>
               <div class='col-md-12 form-group'>
-                <button class='form-control Dbtn btn-primary submit-button' type='submit'>ادفع  »</button>
+                <a href="/profile"><button class='form-control Dbtn btn-primary'>ادفع  »</button></a> <!--submit-button type='submit'-->
               </div>
             </div>
             <div class='form-row'>
@@ -77,17 +79,18 @@
                 </div>
               </div>
             </div>
-          </form>
+            </center>
+          <!--</form>-->
         </div>
         <div class='col-md-4'></div>
+
     </div>
 </div>  </div>
     </center>
   </main>
   <script>
 
-
-  $(function() {
+  /*$(function() {
     $('form.require-validation').bind('submit', function(e) {
       var $form         = $(e.target).closest('form'),
           inputSelector = ['input[type=email]', 'input[type=password]',
@@ -109,8 +112,8 @@
       });
     });
   });
-
-  $(function() {
+*/
+  /*$(function() {
     var $form = $(" #payment-form"); $form.on('submit', function(e) { if (!$form.data('cc-on-file')) { e.preventDefault(); Stripe.setPublishableKey($form.data('stripe-publishable-key')); Stripe.createToken({ number: $('.card-number').val(), cvc:
                     $('.card-cvc').val(), exp_month: $('.card-expiry-month').val(), exp_year: $('.card-expiry-year').val() }, stripeResponseHandler); } }); function stripeResponseHandler(status, response) { if (response.error) { $('.error')
                     .removeClass('hide') .find('.alert') .text(response.error.message); } else { // token contains id, last4, and card type var token=response['.id']; // insert the token into the form so it gets submitted to the server
@@ -118,7 +121,7 @@
                   $form.get(0).submit();
                   }
                   }
-                  });
-                  </script>
+                });*/
+</script>
 
-                  <%- include("footer") -%>
+<%- include("footer") -%>

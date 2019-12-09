@@ -36,6 +36,18 @@
 
 
     <h4> تجد جميع الاكواد هنا </h4>
+    <form class=""method="post">
+
+    <!-- msg -->
+    <p style="display:<%= btnaccess %>" >لا يمكنك معاينةالكود</p>
+    <a href="/membership">
+    <button type="button" name="accessButton1" class="btn Abtn btn-sm btn-outline-secondary" value="<%=buyId%>"  style="display:<%= btnaccess %>" > حدث عضويتك </button> </a>
+
+    <button type="submit" name="memberBtn" class="btn Abtn btn-sm btn-outline-secondary" value="<%= paymentAlbum %>" formaction="/payment" style="display:<%= btnaccess %>" > الشراء </button>
+
+    <!-- end msg -->
+
+    </form>
     <div class="album py-5 bg-light">
       <div class="container">
         <!-- to display albums as rows -->
@@ -44,9 +56,10 @@
           <!-- const array_name = ['a', 'b', 'c'];  -->
           <!-- array_name.forEach(function () {} ); -->
           <% newAlbums.forEach(function(album){ %>
+
           <div class="col-md-4">
             <div class="card mb-4 shadow-sm">
-              <form id="viewForm" class="" method="post" onload="checkCode();">
+              <form class="" action="/albums" method="post" onload="checkCode();">
 
                 <b class="card-text"> عنوان الكود : <%= album.title %> </b>
 
@@ -60,7 +73,7 @@
                   <p class="card-text" id="codeType"> نوع الكود: <%= album.codeType %></p>
                   <div class="d-flex justify-content-between align-items-center">
                     <div class="btn-group">
-                      <button type="button" class="btn Abtn btn-sm btn-outline-secondary" value="<%= album._id %> "> <%=access%> </button> <!--معاينة 👁-->
+                      <button type="submit" name="viewBtn" class="btn Abtn btn-sm btn-outline-secondary" value="<%=album._id%>" formaction="/access"> معاينة 👁 </button>
                     </div>
                     <small class="text-muted"> الناشر : <%= album.ownerName %> </small> <!-- code owner -->
                   </div>
@@ -68,6 +81,7 @@
 
                 <input type="hidden" name="listName" value=" owner "></input>
               </form>
+
             </div>
           </div>
           <% }) %>
@@ -76,6 +90,8 @@
     </div>
   </main>
 </center>
+
+
 
 <%- include("footer") -%>
 
