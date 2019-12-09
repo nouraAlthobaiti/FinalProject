@@ -1,46 +1,81 @@
 <%- include("header") -%>
 
     <!-- background picture and specify user -->
-    <section class="sec1">
-      <p class="hugeText">كودي ..</p>
+  <!--  <section class="sec1">
+      <!--<p class="hugeText">كودي ..</p>
       <p class="hugeText">احصل على الكود المطلوب بسهولة.</p>
-    </section>
+    </section> -->
 
+    <div id="carouselExampleInterval" class="carousel slide" data-ride="carousel">
+      <div class="carousel-inner">
+        <div class="carousel-item active" data-interval="10000">
+          <img src="img\background5.jpg" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item" data-interval="2000">
+          <img src="img\background6.png" class="d-block w-100" alt="...">
+        </div>
+        <div class="carousel-item">
+          <img src="img\backgraound2.png" class="d-block w-100" alt="...">
+        </div>
+      </div>
+      <a class="carousel-control-prev" href="#carouselExampleInterval" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+      <a class="carousel-control-next" href="#carouselExampleInterval" role="button" data-slide="next">
+        <span class="carousel-control-next-icon" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+    </div>
     <!-- choose plan -->
     <section class="sec2">
-      choose plan
-      
+
+
     </section>
 
     <!-- choose plan -->
     <section class="sec3">
-      plans
-    </section>
-
-    <!-- sign in/up -->
-    <section class="sec4">
 
     </section>
-
+    <center>
     <!-- more photos collection -->
     <section class="sec5">
-      more photos collection
+      <img class="m3" src="img\use.png" alt="my logo" />
+        <h4> الاستخدام </h4>
+  سهولة الاستخدام والوصول إلى كل محتويات الموقع
     </section>
 
     <!-- photos category -->
     <section class="sec6">
-      photos category
+      <img class="m3" src="img\flex.png" alt="my logo" />
+        <h4>المرونة </h4>
+إمكانية إضافة أي محتوى من الممكن أي يفيد المطورين
     </section>
 
     <!-- conclusion information -->
     <section class="sec7">
-      conclusion information
+      <img class="m3" src="img\update.png" alt="my logo" />
+        <h4> الصلاحيات</h4>
+      معاينة وتحديث الأكواد وتغيير العضويات
     </section>
 
     <!-- background picture & sign in/up -->
     <section class="sec8">
-      background picture & sign in/up
+
     </section>
+
+    <!-- sign in/up -->
+    <section class="sec4">
+      <form method="get" action="/signup">
+        <button class="Dbtn" id="logBtn" style=" margin-top: 20px ; margin-left:15px; margin-right: 15px; display:<%= btnVisability %>">تسجيل جديد </button>
+      </form>
+      <form method="get" action="/login">
+        <button  class="Dbtn" style="    margin-top: 20px ; margin-left:15px; margin-right: 15px; display:<%= btnVisability %>" id="signBtn">تسجيل دخول </button>
+      </form>
+    </section>
+          </center>
+
+
 
 
 <%- include("footer") -%>
