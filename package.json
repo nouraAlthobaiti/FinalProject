@@ -16,7 +16,7 @@
     "express": "^4.17.1",
     "express-session": "^1.17.0",
     "html": "^1.0.0",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.19",
     "lunr": "^2.3.8",
     "match-words": "^1.0.0",
     "mongoose": "^5.7.13",
